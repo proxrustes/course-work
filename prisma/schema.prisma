@@ -1,0 +1,132 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Training_Direction {
+  Direction_ID   Int               @id @default(autoincrement())
+  Direction_Name String
+  Specialities   Speciality[]
+}
+
+model Speciality {
+  Speciality_ID    Int                @id @default(autoincrement())
+  Speciality_Name  String
+  Direction_ID     Int
+  Direction        Training_Direction @relation(fields: [Direction_ID], references: [Direction_ID])
+  Study_Plans      Study_Plan[]
+}
+
+model Education_Qualification_Level {
+  Level_ID   Int          @id @default(autoincrement())
+  Level_Name String
+  StudyPlans Study_Plan[]
+}
+
+model Graduating_Department {
+  Department_ID   Int          @id @default(autoincrement())
+  Department_Name String
+  Head            String
+  StudyPlans      Study_Plan[]
+}
+
+model Faculty_Institute {
+  Faculty_ID   Int          @id @default(autoincrement())
+  Faculty_Name String
+  Dean         String
+  StudyPlans   Study_Plan[]
+}
+
+model Form_of_Study {
+  Form_ID     Int          @id @default(autoincrement())
+  Form_Name   String
+  StudyPlans  Study_Plan[]
+}
+
+model Study_Duration {
+  Duration_ID     Int          @id @default(autoincrement())
+  Duration_Length Int
+  StudyPlans      Study_Plan[]
+}
+
+model Qualification {
+  Qualification_ID   Int          @id @default(autoincrement())
+  Qualification_Name String
+  StudyPlans         Study_Plan[]
+}
+
+model Study_Plan {
+  Plan_ID           Int                     @id @default(autoincrement())
+  Speciality_ID     Int
+  Level_ID          Int
+  Department_ID     Int
+  Faculty_ID        Int
+  Form_ID           Int
+  Duration_ID       Int
+  Qualification_ID  Int
+  Creation_Date     DateTime
+  Speciality        Speciality              @relation(fields: [Speciality_ID], references: [Speciality_ID])
+  Level             Education_Qualification_Level @relation(fields: [Level_ID], references: [Level_ID])
+  Department        Graduating_Department   @relation(fields: [Department_ID], references: [Department_ID])
+  Faculty           Faculty_Institute       @relation(fields: [Faculty_ID], references: [Faculty_ID])
+  Form              Form_of_Study           @relation(fields: [Form_ID], references: [Form_ID])
+  Duration          Study_Duration          @relation(fields: [Duration_ID], references: [Duration_ID])
+  Qualification     Qualification           @relation(fields: [Qualification_ID], references: [Qualification_ID])
+  PlanSubjects      Plan_Subject[]
+  PlanChanges       Plan_Change[]
+}
+
+model Subject {
+  Subject_ID   Int            @id @default(autoincrement())
+  Subject_Name String
+  Hours_Count  Int
+  PlanSubjects Plan_Subject[]
+}
+
+model Plan_Subject {
+  Record_ID   Int         @id @default(autoincrement())
+  Plan_ID     Int
+  Subject_ID  Int
+  Semester    Int
+  Plan        Study_Plan  @relation(fields: [Plan_ID], references: [Plan_ID])
+  Subject     Subject     @relation(fields: [Subject_ID], references: [Subject_ID])
+}
+
+model User {
+  User_ID       Int           @id @default(autoincrement())
+  Name          String
+  Password      String
+  Access_Level  Int
+  PlanChanges   Plan_Change[]
+  Reports       Report[]
+  ActionLogs    Action_Log[]
+}
+
+model Plan_Change {
+  Change_ID          Int         @id @default(autoincrement())
+  Plan_ID            Int
+  Change_Date        DateTime
+  User_ID            Int
+  Change_Description String
+  Plan               Study_Plan  @relation(fields: [Plan_ID], references: [Plan_ID])
+  User               User        @relation(fields: [User_ID], references: [User_ID])
+}
+
+model Report {
+  Report_ID        Int       @id @default(autoincrement())
+  Report_Name      String
+  Generation_Date  DateTime
+  User_ID          Int
+  User             User      @relation(fields: [User_ID], references: [User_ID])
+}
+
+model Action_Log {
+  Action_Log_ID   Int       @id @default(autoincrement())
+  Action          String
+  User_ID         Int
+  Additional_Info String
+  User            User      @relation(fields: [User_ID], references: [User_ID])
+}

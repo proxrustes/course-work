@@ -5,7 +5,7 @@ import { HTTP_RESPONSES } from "@/components/common/enums/httpResponses"
 
 export async function executeIfValid(
   req: Request,
-  rolePermissions: string[],
+  Access_Level: number,
   callback: Function
 ) {
   const token = cookies().get("currentUser")
@@ -17,7 +17,7 @@ export async function executeIfValid(
   if (!user) {
     return NextResponse.json(HTTP_RESPONSES[401])
   }
-  if (!rolePermissions.includes(user.role)) {
+  if (Access_Level > user.Access_Level && Access_Level != -1) {
     return NextResponse.json(HTTP_RESPONSES[403])
   }
 

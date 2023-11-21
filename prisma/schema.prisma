@@ -1,132 +1,133 @@
-datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
-}
 generator client {
   provider = "prisma-client-js"
 }
 
-model Training_Direction {
-  Direction_ID   Int               @id @default(autoincrement())
-  Direction_Name String
-  Specialities   Speciality[]
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
 }
 
-model Speciality {
-  Speciality_ID    Int                @id @default(autoincrement())
-  Speciality_Name  String
-  Direction_ID     Int
-  Direction        Training_Direction @relation(fields: [Direction_ID], references: [Direction_ID])
-  Study_Plans      Study_Plan[]
+model training_direction {
+  direction_id   Int          @id @default(autoincrement())
+  direction_name String
+  specialities   speciality[]
 }
 
-model Education_Qualification_Level {
-  Level_ID   Int          @id @default(autoincrement())
-  Level_Name String
-  StudyPlans Study_Plan[]
+model speciality {
+  speciality_id   Int                @id @default(autoincrement())
+  speciality_name String
+  direction_id    Int
+  direction       training_direction @relation(fields: [direction_id], references: [direction_id])
+  study_plans     study_plan[]
 }
 
-model Graduating_Department {
-  Department_ID   Int          @id @default(autoincrement())
-  Department_Name String
-  Head            String
-  StudyPlans      Study_Plan[]
+model education_qualification_level {
+  level_id   Int          @id @default(autoincrement())
+  level_name String
+  study_plans study_plan[]
 }
 
-model Faculty_Institute {
-  Faculty_ID   Int          @id @default(autoincrement())
-  Faculty_Name String
-  Dean         String
-  StudyPlans   Study_Plan[]
+model graduating_department {
+  department_id   Int          @id @default(autoincrement())
+  department_name String
+  head            String
+  study_plans      study_plan[]
 }
 
-model Form_of_Study {
-  Form_ID     Int          @id @default(autoincrement())
-  Form_Name   String
-  StudyPlans  Study_Plan[]
+model faculty_institute {
+  faculty_id   Int          @id @default(autoincrement())
+  faculty_name String
+  dean         String
+  study_plans   study_plan[]
 }
 
-model Study_Duration {
-  Duration_ID     Int          @id @default(autoincrement())
-  Duration_Length Int
-  StudyPlans      Study_Plan[]
+model form_of_study {
+  form_id    Int          @id @default(autoincrement())
+  form_name  String
+  study_plans study_plan[]
 }
 
-model Qualification {
-  Qualification_ID   Int          @id @default(autoincrement())
-  Qualification_Name String
-  StudyPlans         Study_Plan[]
+model study_duration {
+  duration_id     Int          @id @default(autoincrement())
+  duration_length Int
+  study_plans      study_plan[]
 }
 
-model Study_Plan {
-  Plan_ID           Int                     @id @default(autoincrement())
-  Speciality_ID     Int
-  Level_ID          Int
-  Department_ID     Int
-  Faculty_ID        Int
-  Form_ID           Int
-  Duration_ID       Int
-  Qualification_ID  Int
-  Creation_Date     DateTime
-  Speciality        Speciality              @relation(fields: [Speciality_ID], references: [Speciality_ID])
-  Level             Education_Qualification_Level @relation(fields: [Level_ID], references: [Level_ID])
-  Department        Graduating_Department   @relation(fields: [Department_ID], references: [Department_ID])
-  Faculty           Faculty_Institute       @relation(fields: [Faculty_ID], references: [Faculty_ID])
-  Form              Form_of_Study           @relation(fields: [Form_ID], references: [Form_ID])
-  Duration          Study_Duration          @relation(fields: [Duration_ID], references: [Duration_ID])
-  Qualification     Qualification           @relation(fields: [Qualification_ID], references: [Qualification_ID])
-  PlanSubjects      Plan_Subject[]
-  PlanChanges       Plan_Change[]
+model qualification {
+  qualification_id   Int          @id @default(autoincrement())
+  qualification_name String
+  study_plans         study_plan[]
 }
 
-model Subject {
-  Subject_ID   Int            @id @default(autoincrement())
-  Subject_Name String
-  Hours_Count  Int
-  PlanSubjects Plan_Subject[]
+model study_plan {
+  plan_id          Int                           @id @default(autoincrement())
+  speciality_id    Int
+  level_id         Int
+  department_id    Int
+  faculty_id       Int
+  form_id          Int
+  duration_id      Int
+  qualification_id Int
+  creation_date    DateTime
+  plan_changes      plan_change[]
+  plan_subjects     plan_subject[]
+  qualification    qualification                 @relation(fields: [qualification_id], references: [qualification_id])
+  duration         study_duration                @relation(fields: [duration_id], references: [duration_id])
+  form             form_of_study                 @relation(fields: [form_id], references: [form_id])
+  faculty          faculty_institute             @relation(fields: [faculty_id], references: [faculty_id])
+  department       graduating_department         @relation(fields: [department_id], references: [department_id])
+  level            education_qualification_level @relation(fields: [level_id], references: [level_id])
+  speciality       speciality                    @relation(fields: [speciality_id], references: [speciality_id])
 }
 
-model Plan_Subject {
-  Record_ID   Int         @id @default(autoincrement())
-  Plan_ID     Int
-  Subject_ID  Int
-  Semester    Int
-  Plan        Study_Plan  @relation(fields: [Plan_ID], references: [Plan_ID])
-  Subject     Subject     @relation(fields: [Subject_ID], references: [Subject_ID])
+model subject {
+  subject_id   Int            @id @default(autoincrement())
+  subject_name String
+  hours_count  Int
+  plan_subjects plan_subject[]
 }
 
-model User {
-  User_ID       Int           @id @default(autoincrement())
-  Name          String
-  Password      String
-  Access_Level  Int
-  PlanChanges   Plan_Change[]
-  Reports       Report[]
-  ActionLogs    Action_Log[]
+model plan_subject {
+  record_id  Int        @id @default(autoincrement())
+  plan_id    Int
+  subject_id Int
+  semester   Int
+  subject    subject    @relation(fields: [subject_id], references: [subject_id])
+  plan       study_plan @relation(fields: [plan_id], references: [plan_id])
 }
 
-model Plan_Change {
-  Change_ID          Int         @id @default(autoincrement())
-  Plan_ID            Int
-  Change_Date        DateTime
-  User_ID            Int
-  Change_Description String
-  Plan               Study_Plan  @relation(fields: [Plan_ID], references: [Plan_ID])
-  User               User        @relation(fields: [User_ID], references: [User_ID])
+model user {
+  user_id      Int           @id @default(autoincrement())
+  name         String
+  password     String
+  access_level Int
+  action_logs   action_log[]
+  plan_changes  plan_change[]
+  reports      report[]
 }
 
-model Report {
-  Report_ID        Int       @id @default(autoincrement())
-  Report_Name      String
-  Generation_Date  DateTime
-  User_ID          Int
-  User             User      @relation(fields: [User_ID], references: [User_ID])
+model plan_change {
+  change_id          Int        @id @default(autoincrement())
+  plan_id            Int
+  change_date        DateTime
+  user_id            Int
+  change_description String
+  user               user       @relation(fields: [user_id], references: [user_id])
+  plan               study_plan @relation(fields: [plan_id], references: [plan_id])
 }
 
-model Action_Log {
-  Action_Log_ID   Int       @id @default(autoincrement())
-  Action          String
-  User_ID         Int
-  Additional_Info String
-  User            User      @relation(fields: [User_ID], references: [User_ID])
+model report {
+  report_id       Int      @id @default(autoincrement())
+  report_name     String
+  generation_date DateTime
+  user_id         Int
+  user            user     @relation(fields: [user_id], references: [user_id])
+}
+
+model action_log {
+  action_log_id   Int    @id @default(autoincrement())
+  action          String
+  user_id         Int
+  additional_info String
+  user            user   @relation(fields: [user_id], references: [user_id])
 }

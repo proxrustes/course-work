@@ -5,7 +5,7 @@ export function AdminProfile(){
         <Stack>
         <Button>Add User</Button>
         <Button>DB Copy</Button>
+        <Button>View Action Log</Button>
         </Stack>
-      
     )
 }

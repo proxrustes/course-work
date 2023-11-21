@@ -1,6 +1,7 @@
 "use client"
 
 import { AdminProfile } from "@/components/pages/profile/AdminProfile";
+import { DBOperatorProfile } from "@/components/pages/profile/DBOperatorProfile";
 import { DeanProfile } from "@/components/pages/profile/DeanProfile";
 import { DepartmentHeadProfile } from "@/components/pages/profile/DepartmentHeadProfile";
 import { ProfessorProfile } from "@/components/pages/profile/ProfessorProfile";
@@ -17,8 +18,7 @@ export default function Profile(){
     const [user] = useCurrentUser()
     function handleLogout(){
     
-        Cookies.remove("currentUser")
-        
+      Cookies.remove("currentUser")
       router.push("/")
     }
     return (
@@ -31,7 +31,7 @@ export default function Profile(){
           {user.access_level === 3 && <DepartmentHeadProfile/>}
           {user.access_level === 4 && <DeanProfile/>}
           {user.access_level === 5 && <AdminProfile/>}
-          {user.access_level === 6 && <StudentProfile/>}
+          {user.access_level === 6 && <DBOperatorProfile/>}
          
           <center>
             {" "}

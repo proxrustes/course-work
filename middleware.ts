@@ -13,14 +13,6 @@ export async function middleware(req: NextRequest) {
       req.nextUrl.pathname = `/error/${ERROR_TYPES.ACCESS_DENIED}`
       return NextResponse.redirect(req.nextUrl)
     }
-
-    const decodedJWT = decodeJwt(token)
-    const currentTimestamp = Math.floor(Date.now() / 1000)
-
-    if (decodedJWT.exp && decodedJWT.exp < currentTimestamp) {
-      req.nextUrl.pathname = "/token-verification"
-      return NextResponse.redirect(req.nextUrl)
-    }
     const isValidToken = await verify(token)
     if (!isValidToken) {
       return redirectWithDelete(req, "/")

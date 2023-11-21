@@ -7,9 +7,20 @@ import { ProfessorProfile } from "@/components/pages/profile/ProfessorProfile";
 import { StudentProfile } from "@/components/pages/profile/StudentProfile";
 import useCurrentUser from "@/hooks/auth/useCurrentUser";
 import { Button, Container, Typography } from "@mui/material";
+import Cookies from "js-cookie"
+import { useRouter } from "next/navigation";
+
 
 export default function Profile(){
+    
+  const router = useRouter()
     const [user] = useCurrentUser()
+    function handleLogout(){
+    
+        Cookies.remove("currentUser")
+        
+      router.push("/")
+    }
     return (
         <Container>
 <Typography variant="h3" sx={{mb: 4}}>Welcome {user?.name ?? ''}</Typography>
@@ -24,7 +35,7 @@ export default function Profile(){
          
           <center>
             {" "}
-            <Button color="secondary" variant="text" href="/logout"
+            <Button color="secondary" variant="text" onClick={handleLogout}
             sx={{mt: 5}}>
               Logout
             </Button>

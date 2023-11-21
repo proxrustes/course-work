@@ -4,11 +4,10 @@ import { protectedRoutes, superuserRoutes } from "./router/routes"
 import { ERROR_TYPES } from "./components/common/enums/errors"
 import { verify } from "./lib/jwtUtils/verify"
 import { parse } from "./lib/jwtUtils/parse"
-import { User } from "@prisma/client"
+import { user } from "@prisma/client"
 
 export async function middleware(req: NextRequest) {
   const token = req.cookies.get("currentUser")?.value
-
   if (protectedRoutes.includes(req.nextUrl.pathname)) {
     if (!token) {
       req.nextUrl.pathname = `/error/${ERROR_TYPES.ACCESS_DENIED}`
@@ -24,9 +23,9 @@ export async function middleware(req: NextRequest) {
     }
     const isValidToken = await verify(token)
     if (!isValidToken) {
-      return redirectWithDelete(req, "/login")
+      return redirectWithDelete(req, "/")
     }
-    const user = (await parse(token)) as User
+    const user = (await parse(token)) as user
     if (superuserRoutes.includes(req.nextUrl.pathname)) {
       req.nextUrl.pathname = `/error/${ERROR_TYPES.ACCESS_DENIED}`
       return NextResponse.redirect(req.nextUrl)

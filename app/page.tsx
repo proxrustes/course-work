@@ -48,7 +48,7 @@ export default function Home() {
   async function login(token: string) {
     const jwt = await handleLogin(token)
     if (jwt) {
-      router.push("/hui")
+      router.push("/profile")
     } else alert("user not found")
   }
   

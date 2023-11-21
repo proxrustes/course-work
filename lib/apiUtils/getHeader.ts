@@ -3,7 +3,7 @@ export async function getHeader(req: Request, header: string) {
     try {
       return headers.get(header)
     } catch (e) {
-      return headers[header]
+      return e
     }
   }
   

@@ -1,22 +1,22 @@
 import { useEffect, useState } from "react"
 import Cookies from "js-cookie"
 import { decodeJwt } from "jose"
-import { User } from "../../definitions/types/user"
+import { user } from "@prisma/client"
 
-const useCurrentUser = (): [User | null] => {
-  const [user, setUser] = useState<User | null>(null)
+const useCurrentUser = (): [user | null] => {
+  const [currentUser, setUser] = useState<user | null>(null)
 
   useEffect(() => {
     const token = Cookies.get("currentUser")
     if (token) {
-      const json = decodeJwt(token) as User
+      const json = decodeJwt(token) as user
       setUser(json)
     } else {
-      setUser({} as User)
+      setUser({} as user)
     }
   }, [])
 
-  return [user]
+  return [currentUser]
 }
 
 export default useCurrentUser

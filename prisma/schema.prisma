@@ -61,6 +61,7 @@ model qualification {
 
 model study_plan {
   plan_id          Int                           @id @default(autoincrement())
+  is_approved Int
   speciality_id    Int
   level_id         Int
   department_id    Int

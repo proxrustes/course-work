@@ -66,13 +66,15 @@ model study_plan {
   level_id         Int
   department_id    Int
   faculty_id       Int
+  subject_id Int
   form_id          Int
   duration_id      Int
   qualification_id Int
   creation_date    DateTime
+  title             String
   text             String
   plan_changes     plan_change[]
-  plan_subjects    plan_subject[]
+  subject         subject                    @relation(fields: [subject_id], references: [subject_id])
   speciality       speciality                    @relation(fields: [speciality_id], references: [speciality_id])
   level            education_qualification_level @relation(fields: [level_id], references: [level_id])
   department       graduating_department         @relation(fields: [department_id], references: [department_id])
@@ -86,17 +88,9 @@ model subject {
   subject_id    Int            @id @default(autoincrement())
   subject_name  String
   hours_count   Int
-  plan_subjects plan_subject[]
+  plans         study_plan[]
 }
 
-model plan_subject {
-  record_id  Int        @id @default(autoincrement())
-  plan_id    Int
-  subject_id Int
-  semester   Int
-  plan       study_plan @relation(fields: [plan_id], references: [plan_id])
-  subject    subject    @relation(fields: [subject_id], references: [subject_id])
-}
 
 model user {
   user_id      Int           @id @default(autoincrement())

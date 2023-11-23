@@ -5,7 +5,6 @@ async function main() {
     await prisma.action_log.deleteMany({});
     await prisma.report.deleteMany({});
     await prisma.plan_change.deleteMany({});
-    await prisma.plan_subject.deleteMany({});
     await prisma.study_plan.deleteMany({});
     await prisma.user.deleteMany({});
     await prisma.subject.deleteMany({});
@@ -129,6 +128,8 @@ await prisma.user.create({
 await prisma.study_plan.create({
     data: {
         is_approved: 1,
+        title: "Title",
+        subject_id: 1,
         speciality_id: 1, // Assumes an existing speciality_id
         level_id: 1, // Assumes an existing level_id
         department_id: 1, // Assumes an existing department_id
@@ -141,14 +142,6 @@ await prisma.study_plan.create({
     }
 });
 
-// Plan Subject
-await prisma.plan_subject.create({
-    data: {
-        plan_id: 1, // Assumes an existing plan_id
-        subject_id: 1, // Assumes an existing subject_id
-        semester: 1
-    }
-});
 }
 main()
   .then(async () => {

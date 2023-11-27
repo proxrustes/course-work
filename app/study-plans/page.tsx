@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import {
   Container,
   List,
@@ -6,26 +6,26 @@ import {
   ListItemButton,
   ListItemText,
   Button,
-} from "@mui/material";
-import { useEffect, useReducer, useState } from "react";
-import { study_plan } from "../api/study-plan/route";
+} from "@mui/material"
+import { useEffect, useReducer, useState } from "react"
+import { study_plan } from "../api/study-plan/route"
 import {
   ACTIONS,
   FilterMenu,
   FilterState,
   SetFilterAction,
-} from "@/components/pages/study-plans/FilterMenu";
-import { filterPLans } from "@/lib/filtering/filterPlans";
+} from "@/components/pages/study-plans/FilterMenu"
+import { filterPLans } from "@/lib/filtering/filterPlans"
 
 const filterReducer = (
   state: FilterState,
   action: SetFilterAction
 ): FilterState => {
   if (ACTIONS[action.type]) {
-    return { ...state, ...action.payload };
+    return { ...state, ...action.payload }
   }
   return state;
-};
+}
 
 const initialFilterState: FilterState = {
   is_approved: "all",
@@ -37,21 +37,21 @@ const initialFilterState: FilterState = {
   form_id: [],
   duration_id: [],
   qualification_id: [],
-};
+}
 
 export default function StudyPlans() {
-  const [plans, setPlans] = useState<study_plan[]>([]);
-  const [filteredPlans, setFilteredPlans] = useState<study_plan[]>([]);
+  const [plans, setPlans] = useState<study_plan[]>([])
+  const [filteredPlans, setFilteredPlans] = useState<study_plan[]>([])
 
   const [filterState, dispatchFilter] = useReducer(
     filterReducer,
     initialFilterState
   );
   useEffect(() => {
-    const filteredPlans = filterPLans(plans, filterState);
-    setFilteredPlans(filteredPlans);
-  }, [filterState]);
-
+    const filteredPlans = filterPLans(plans, filterState)
+    setFilteredPlans(filteredPlans)
+  }, [filterState])
+  
   useEffect(() => {
     fetch("/api/study-plan", {
       headers: {
@@ -61,11 +61,11 @@ export default function StudyPlans() {
     })
       .then((res) => res.json())
       .then((json) => {
-        const message = json.message;
-        setPlans(message);
-        setFilteredPlans(message);
-      });
-  }, []);
+        const message = json.message
+        setPlans(message)
+        setFilteredPlans(message)
+      })
+  }, [])
 
   return (
     <Container>

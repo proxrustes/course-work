@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 
 // POST request to create a new qualification
-export async function POST_qualification(req: any) {
+export async function POST(req: any) {
     const body = JSON.parse(req.body);
 
     return prisma.qualification.create({
@@ -17,7 +17,7 @@ export async function POST_qualification(req: any) {
 }
 
 // GET request to fetch all qualifications
-export async function GET_qualification(req: any) {
+export async function GET(req: any) {
     return prisma.qualification.findMany({
         select: {
             qualification_id: true,

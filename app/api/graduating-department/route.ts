@@ -3,7 +3,7 @@ import { prisma } from "@/prisma/prismaClient";
 import { NextResponse } from "next/server";
 
 // POST request to create a new graduating_department
-export async function POST_graduating_department(req: any) {
+export async function POST(req: any) {
     const body = JSON.parse(req.body);
 
     return prisma.graduating_department.create({
@@ -17,7 +17,7 @@ export async function POST_graduating_department(req: any) {
 }
 
 // GET request to fetch all graduating_departments
-export async function GET_graduating_department(req: any) {
+export async function GET(req: any) {
     return prisma.graduating_department.findMany({
         select: {
             department_id: true,

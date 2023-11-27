@@ -3,7 +3,7 @@ import { prisma } from "@/prisma/prismaClient";
 import { NextResponse } from "next/server";
 
 // POST request to create a new form_of_study
-export async function POST_form_of_study(req: any) {
+export async function POST(req: any) {
     const body = JSON.parse(req.body);
 
     return prisma.form_of_study.create({
@@ -16,7 +16,7 @@ export async function POST_form_of_study(req: any) {
 }
 
 // GET request to fetch all form_of_studies
-export async function GET_form_of_study(req: any) {
+export async function GET(req: any) {
     return prisma.form_of_study.findMany({
         select: {
             form_id: true,

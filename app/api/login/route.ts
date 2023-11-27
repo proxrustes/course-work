@@ -1,4 +1,4 @@
-import { HTTP_RESPONSES } from "@/components/common/enums/httpResponses"
+import { HTTP_RESPONSES } from "@/definitions/enums/httpResponses"
 import { getBody } from "@/lib/apiUtils/getBody"
 import { sign } from "@/lib/jwtUtils/sign"
 import { prisma } from "@/prisma/prismaClient"

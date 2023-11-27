@@ -1,7 +1,7 @@
 import { NextResponse, NextRequest } from "next/server"
 import { decodeJwt } from "jose"
 import { protectedRoutes, superuserRoutes } from "./router/routes"
-import { ERROR_TYPES } from "./components/common/enums/errors"
+import { ERROR_TYPES } from "./definitions/enums/errors"
 import { verify } from "./lib/jwtUtils/verify"
 import { parse } from "./lib/jwtUtils/parse"
 import { user } from "@prisma/client"

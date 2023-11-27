@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
 import { parse } from "../jwtUtils/parse"
 import { cookies } from "next/headers"
-import { HTTP_RESPONSES } from "@/components/common/enums/httpResponses"
+import { HTTP_RESPONSES } from "@/definitions/enums/httpResponses"
 
 export async function executeIfValid(
   req: Request,

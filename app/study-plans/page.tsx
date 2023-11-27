@@ -5,6 +5,7 @@ import {
   Typography,
   ListItemButton,
   ListItemText,
+  Button,
 } from "@mui/material";
 import { useEffect, useReducer, useState } from "react";
 import { study_plan } from "../api/study-plan/route";
@@ -81,6 +82,7 @@ export default function StudyPlans() {
             </ListItemButton>
           ))}
       </List>
+      <Button href="/add-plan">Create Plan</Button>
       <FilterMenu
         study_plans={filteredPlans}
         filterState={filterState}

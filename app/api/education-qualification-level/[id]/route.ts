@@ -1,4 +1,4 @@
-import { HTTP_RESPONSES } from "@/components/common/enums/httpResponses";
+import { HTTP_RESPONSES } from "@/definitions/enums/httpResponses";
 import { prisma } from "@/prisma/prismaClient";
 import { NextResponse } from "next/server";
 

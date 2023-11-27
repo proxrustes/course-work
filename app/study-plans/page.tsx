@@ -41,6 +41,7 @@ const initialFilterState: FilterState = {
 
 export default function StudyPlans() {
   const [plans, setPlans] = useState<study_plan[]>([])
+  
   const [filteredPlans, setFilteredPlans] = useState<study_plan[]>([])
 
   const [filterState, dispatchFilter] = useReducer(

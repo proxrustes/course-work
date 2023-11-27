@@ -59,8 +59,7 @@ export const ACTIONS = {
       const [departments, setDepartments] = useState<{ department_id: number; department_name: string; head: string }[]>([]);
       const [faculties, setFaculties] = useState<{ faculty_id: number; faculty_name: string; dean: string }[]>([]);
       const [qualifications, setQualifications] = useState<{ qualification_id: number; qualification_name: string }[]>([]);
-      const [title, setTitle] = useState('')
-      const [text, setText] = useState('')
+
     useEffect(() => {
       fetch("/api/subject", {
           headers: {
@@ -194,6 +193,172 @@ export const ACTIONS = {
           {specialities.map((speciality) => (
             <MenuItem key={speciality.speciality_id} value={speciality.speciality_id}>
               {speciality.speciality_name}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+      <FormControl fullWidth sx={{ mt: 2 }}>
+        <InputLabel id="level-label">Level</InputLabel>
+        <Select
+          labelId="level-label"
+          id="level-select"
+          multiple
+          value={props.filterState.level_id}
+          onChange={(e) =>
+            props.dispatchFilter({
+              type: ACTIONS.level_id,
+              payload: { level_id: e.target.value as number[] },
+            })
+          }
+          input={<OutlinedInput label="Level" />}
+          MenuProps={MenuProps}
+        >
+          {levels.map((level) => (
+            <MenuItem key={level.level_id} value={level.level_id}>
+              {level.level_name}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+        <FormControl fullWidth sx={{ mt: 2 }}>
+        <InputLabel id="department-label">Department</InputLabel>
+        <Select
+          labelId="department-label"
+          id="department-select"
+          multiple
+          value={props.filterState.department_id}
+          onChange={(e) =>
+            props.dispatchFilter({
+              type: ACTIONS.department_id,
+              payload: { department_id: e.target.value as number[] },
+            })
+          }
+          input={<OutlinedInput label="Department" />}
+          MenuProps={MenuProps}
+        >
+          {departments.map((department) => (
+            <MenuItem key={department.department_id} value={department.department_id}>
+              {department.department_name}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+  {/* Select for Subjects */}
+  <FormControl fullWidth sx={{ mt: 2 }}>
+        <InputLabel id="subject-label">Subject</InputLabel>
+        <Select
+          labelId="subject-label"
+          id="subject-select"
+          multiple
+          value={props.filterState.subject_id}
+          onChange={(e) =>
+            props.dispatchFilter({
+              type: ACTIONS.subject_id,
+              payload: { subject_id: e.target.value as number[] },
+            })
+          }
+          input={<OutlinedInput label="Subject" />}
+          MenuProps={MenuProps}
+        >
+          {subjects.map((subject) => (
+            <MenuItem key={subject.subject_id} value={subject.subject_id}>
+              {subject.subject_name}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+
+      {/* Select for Durations */}
+      <FormControl fullWidth sx={{ mt: 2 }}>
+        <InputLabel id="duration-label">Duration</InputLabel>
+        <Select
+          labelId="duration-label"
+          id="duration-select"
+          multiple
+          value={props.filterState.duration_id}
+          onChange={(e) =>
+            props.dispatchFilter({
+              type: ACTIONS.duration_id,
+              payload: { duration_id: e.target.value as number[] },
+            })
+          }
+          input={<OutlinedInput label="Duration" />}
+          MenuProps={MenuProps}
+        >
+          {durations.map((duration) => (
+            <MenuItem key={duration.duration_id} value={duration.duration_id}>
+              {duration.duration_length}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+
+      {/* Select for Forms of Study */}
+      <FormControl fullWidth sx={{ mt: 2 }}>
+        <InputLabel id="formOfStudy-label">Form of Study</InputLabel>
+        <Select
+          labelId="formOfStudy-label"
+          id="formOfStudy-select"
+          multiple
+          value={props.filterState.form_id}
+          onChange={(e) =>
+            props.dispatchFilter({
+              type: ACTIONS.form_id,
+              payload: { form_id: e.target.value as number[] },
+            })
+          }
+          input={<OutlinedInput label="Form of Study" />}
+          MenuProps={MenuProps}
+        >
+          {formOfStudy.map((form) => (
+            <MenuItem key={form.form_id} value={form.form_id}>
+              {form.form_name}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+      <FormControl fullWidth sx={{ mt: 2 }}>
+        <InputLabel id="faculty-label">Faculty</InputLabel>
+        <Select
+          labelId="faculty-label"
+          id="faculty-select"
+          multiple
+          value={props.filterState.faculty_id}
+          onChange={(e) =>
+            props.dispatchFilter({
+              type: ACTIONS.faculty_id,
+              payload: { faculty_id: e.target.value as number[] },
+            })
+          }
+          input={<OutlinedInput label="Faculty" />}
+          MenuProps={MenuProps}
+        >
+          {faculties.map((faculty) => (
+            <MenuItem key={faculty.faculty_id} value={faculty.faculty_id}>
+              {faculty.faculty_name}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+      <FormControl fullWidth sx={{ mt: 2 }}>
+        <InputLabel id="qualification-label">Qualification</InputLabel>
+        <Select
+          labelId="qualification-label"
+          id="qualification-select"
+          multiple
+          value={props.filterState.qualification_id}
+          onChange={(e) =>
+            props.dispatchFilter({
+              type: ACTIONS.qualification_id,
+              payload: { qualification_id: e.target.value as number[] },
+            })
+          }
+          input={<OutlinedInput label="Qualification" />}
+          MenuProps={MenuProps}
+        >
+          {qualifications.map((qualification) => (
+            <MenuItem key={qualification.qualification_id} value={qualification.qualification_id}>
+              {qualification.qualification_name}
             </MenuItem>
           ))}
         </Select>

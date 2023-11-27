@@ -15,7 +15,7 @@ import {
   FilterState,
   SetFilterAction,
 } from "@/components/pages/study-plans/FilterMenu"
-import { filterPLans } from "@/lib/filtering/filterPlans"
+import { filterPlans } from "@/lib/filtering/filterPlans"
 
 const filterReducer = (
   state: FilterState,
@@ -43,13 +43,12 @@ export default function StudyPlans() {
   const [plans, setPlans] = useState<study_plan[]>([])
   
   const [filteredPlans, setFilteredPlans] = useState<study_plan[]>([])
-
   const [filterState, dispatchFilter] = useReducer(
     filterReducer,
     initialFilterState
-  );
+  )
   useEffect(() => {
-    const filteredPlans = filterPLans(plans, filterState)
+    const filteredPlans = filterPlans(plans, filterState)
     setFilteredPlans(filteredPlans)
   }, [filterState])
   

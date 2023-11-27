@@ -1,8 +1,11 @@
 "use client"
 import { Button, Container, FormControl, InputLabel, MenuItem, Select, Stack, TextField, Typography } from "@mui/material";
+import { useRouter } from "next/navigation";
+
 import { useEffect, useState } from 'react';
 
 export default function AddPlan() {
+    const router = useRouter()
     const [subjects, setSubjects] = useState<{subject_id: number,
         subject_name: string,
         hours_count: number}[]>([])
@@ -154,7 +157,7 @@ export default function AddPlan() {
               title: title,
           text: text,
             }),
-          })
+          }).then(()=> router.push("/study-plans"))
         } catch (error) {
           console.error('Error:', error)
         }

@@ -4,24 +4,26 @@ import { prisma } from "@/prisma/prismaClient";
 import { NextResponse } from "next/server";
 
 export interface study_plan {
+  plan_id: number,
   title: string;
   text: string;
   subject: { subject_id: number; subject_name: string };
   creation_date: string;
   is_approved: number;
-  speciality_id: number;
-  level_id: number;
-  department_id: number;
-  faculty_id: number;
-  form_id: number;
-  duration_id: number;
-  qualification_id: number;
+  speciality: { speciality_id: number; speciality_name: string };
+  level: { level_id: number; level_name: string };
+  department: { department_id: number; department_name: string };
+  faculty: { faculty_id: number; faculty_name: string };
+  form: { form_id: number; form_name: string };
+  duration: { duration_id: number; duration_length: string };
+  qualification: { qualification_id: number; qualification_name: string };
 }
 
 // GET request to fetch all study_plan with all fields
 export async function GET(req: any) {
   return prisma.study_plan.findMany({
     select: {
+      plan_id: true,
       title: true,
       text: true,
       subject: {
@@ -32,13 +34,48 @@ export async function GET(req: any) {
       },
       creation_date: true,
       is_approved: true,
-      speciality_id: true,
-      level_id: true,
-      department_id: true,
-      faculty_id: true,
-      form_id: true,
-      duration_id: true,
-      qualification_id: true,
+      speciality: {
+        select: {
+          speciality_id: true,
+          speciality_name: true
+        }
+      },
+      level:{
+        select:{
+          level_id: true,
+          level_name: true
+        }
+      },
+      department:{
+        select:{
+          department_id: true,
+          department_name: true
+        }
+      },
+      faculty: {
+        select:{
+          faculty_id: true,
+          faculty_name: true
+        }
+      },
+      form: {
+        select:{
+          form_id: true,
+          form_name: true
+        }
+      },
+      duration: {
+        select:{
+          duration_id: true,
+          duration_length: true
+        }
+      },
+      qualification: {
+        select:{
+          qualification_name: true,
+          qualification_id: true
+        }
+      },
     },
   })
   .then((res) => NextResponse.json(HTTP_RESPONSES[200](res)))

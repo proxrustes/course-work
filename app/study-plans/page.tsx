@@ -16,6 +16,7 @@ import {
   SetFilterAction,
 } from "@/components/pages/study-plans/FilterMenu"
 import { filterPlans } from "@/lib/filtering/filterPlans"
+import { useRouter } from "next/navigation"
 
 const filterReducer = (
   state: FilterState,
@@ -40,6 +41,7 @@ const initialFilterState: FilterState = {
 }
 
 export default function StudyPlans() {
+  const router = useRouter()
   const [plans, setPlans] = useState<study_plan[]>([])
   
   const [filteredPlans, setFilteredPlans] = useState<study_plan[]>([])
@@ -74,7 +76,7 @@ export default function StudyPlans() {
       <List>
         {filteredPlans &&
           filteredPlans.map((plan) => (
-            <ListItemButton>
+            <ListItemButton onClick={()=> router.push(`/plan/${plan.plan_id}`)}>
               <ListItemText
                 primary={plan.title}
                 secondary={plan.subject.subject_name}

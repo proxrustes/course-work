@@ -138,7 +138,7 @@ export default function AddPlan() {
     }, []);
     const handleSubmit = async () => {
         try {
-          const response = await fetch('/api/study-plan', {
+          fetch('/api/study-plan', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

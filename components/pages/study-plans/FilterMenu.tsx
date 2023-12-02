@@ -171,10 +171,10 @@ export const ACTIONS = {
     return (
       <Stack sx={{ pl: 2, pb: 2 }}>
         <Typography variant="h5" sx={{ pt: 1 }}>
-          Select criteria
+          Filter by:
         </Typography>
         <Divider orientation="horizontal" flexItem />
-        <FormControl fullWidth sx={{ mt: 2 }}>
+        <FormControl size="small" fullWidth sx={{ mt: 2 }}>
         <InputLabel id="speciality-label">Speciality</InputLabel>
         <Select
           labelId="speciality-label"
@@ -197,7 +197,7 @@ export const ACTIONS = {
           ))}
         </Select>
       </FormControl>
-      <FormControl fullWidth sx={{ mt: 2 }}>
+      <FormControl size="small" fullWidth sx={{ mt: 2 }}>
         <InputLabel id="level-label">Level</InputLabel>
         <Select
           labelId="level-label"
@@ -220,7 +220,7 @@ export const ACTIONS = {
           ))}
         </Select>
       </FormControl>
-        <FormControl fullWidth sx={{ mt: 2 }}>
+        <FormControl size="small" fullWidth sx={{ mt: 2 }}>
         <InputLabel id="department-label">Department</InputLabel>
         <Select
           labelId="department-label"
@@ -244,7 +244,7 @@ export const ACTIONS = {
         </Select>
       </FormControl>
   {/* Select for Subjects */}
-  <FormControl fullWidth sx={{ mt: 2 }}>
+  <FormControl fullWidth size="small" sx={{ mt: 2 }}>
         <InputLabel id="subject-label">Subject</InputLabel>
         <Select
           labelId="subject-label"
@@ -269,7 +269,7 @@ export const ACTIONS = {
       </FormControl>
 
       {/* Select for Durations */}
-      <FormControl fullWidth sx={{ mt: 2 }}>
+      <FormControl size="small" fullWidth sx={{ mt: 2 }}>
         <InputLabel id="duration-label">Duration</InputLabel>
         <Select
           labelId="duration-label"
@@ -294,7 +294,7 @@ export const ACTIONS = {
       </FormControl>
 
       {/* Select for Forms of Study */}
-      <FormControl fullWidth sx={{ mt: 2 }}>
+      <FormControl fullWidth size="small" sx={{ mt: 2 }}>
         <InputLabel id="formOfStudy-label">Form of Study</InputLabel>
         <Select
           labelId="formOfStudy-label"
@@ -317,7 +317,7 @@ export const ACTIONS = {
           ))}
         </Select>
       </FormControl>
-      <FormControl fullWidth sx={{ mt: 2 }}>
+      <FormControl fullWidth size="small" sx={{ mt: 2 }}>
         <InputLabel id="faculty-label">Faculty</InputLabel>
         <Select
           labelId="faculty-label"
@@ -340,7 +340,7 @@ export const ACTIONS = {
           ))}
         </Select>
       </FormControl>
-      <FormControl fullWidth sx={{ mt: 2 }}>
+      <FormControl fullWidth size="small" sx={{ mt: 2 }}>
         <InputLabel id="qualification-label">Qualification</InputLabel>
         <Select
           labelId="qualification-label"

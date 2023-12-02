@@ -1,11 +1,11 @@
 "use client"
 
 import { prisma } from '@/prisma/prismaClient'
-import { Button, Container, Typography } from '@mui/material'
+import { Avatar, Button, Card, Container, Stack, Typography } from '@mui/material'
 import { user } from '@prisma/client'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
-
+import FaceIcon from '@mui/icons-material/Face';
 export default function Home() {
   const [users, setUsers] = useState<user[]>([])
 
@@ -48,17 +48,29 @@ export default function Home() {
   async function login(token: string) {
     const jwt = await handleLogin(token)
     if (jwt) {
-      router.push("/profile")
+      router.push("/study-plans")
     } else alert("user not found")
   }
-  
+  function UserButton(props: {name:string}){
+    return(
+      <Card variant="outlined" sx={{py:2, width: 200}}>
+        <Stack alignItems="center" gap={2}>
+
+<Avatar><FaceIcon/></Avatar>
+        <Button variant="contained" onClick={()=> login(props.name).catch((e) => alert(e))}>{props.name}</Button>
+        </Stack>
+      </Card>
+    )
+  }
   return (
     <Container>
        <Typography variant='h1'>Study Plans</Typography>
-       <Typography variant='h4'>Login as:</Typography>
-    {users ? users.map((user)=>
-    <Button onClick={()=> login(user.name).catch((e) => alert(e))}>{user.name}</Button>
+       <Stack direction="row" justifyContent="center" gap={1} flexWrap="wrap">
+         {users ? users.map((user)=>
+    <UserButton name={user.name}/>
     ) : null}
+       </Stack>
+   
     </Container>
    
   )

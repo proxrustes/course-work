@@ -1,5 +1,5 @@
 import { study_plan } from "@/app/api/study-plan/route";
-import { Container, Stack, Typography, Divider, FormControl, InputLabel, Select, OutlinedInput, MenuItem, TextField, Button } from "@mui/material";
+import { Container, Stack, Typography, Divider, FormControl, InputLabel, Select, OutlinedInput, MenuItem, TextField, Button, Chip } from "@mui/material";
 import { useState, useEffect, useReducer } from "react"
 
 const ITEM_HEIGHT = 48
@@ -209,23 +209,17 @@ export function EditField(props: Props){
               setQualifications(json.message);
           })
   }, [])
-  
 
-  // Render only when formState is available
   if (!formState) {
       return <div>Loading...</div>;
   }
     return (
       <Container maxWidth="xl">
           <Stack direction="row" gap={4} sx={{mt: 4}}>
-             <Stack sx={{ pl: 2, pb: 2 }}>
-          <Typography variant="h5" sx={{ pt: 1 }}>
-            details
-          </Typography>
-          <Divider orientation="horizontal" flexItem />
+             <Stack >
         
         {/* Speciality Select */}
-        <FormControl fullWidth sx={{ mt: 2 }}>
+        <FormControl size="small" fullWidth sx={{ mt: 2}}>
           <InputLabel id="speciality-label">Speciality</InputLabel>
           <Select
             labelId="speciality-label"
@@ -243,7 +237,7 @@ export function EditField(props: Props){
           </Select>
         </FormControl>
        {/* Level Select */}
-<FormControl fullWidth sx={{ mt: 2 }}>
+<FormControl size="small" fullWidth sx={{ mt: 2 }}>
   <InputLabel id="level-label">Level</InputLabel>
   <Select
     labelId="level-label"
@@ -262,7 +256,7 @@ export function EditField(props: Props){
 </FormControl>
 
 {/* Department Select */}
-<FormControl fullWidth sx={{ mt: 2 }}>
+<FormControl size="small" fullWidth sx={{ mt: 2 }}>
   <InputLabel id="department-label">Department</InputLabel>
   <Select
     labelId="department-label"
@@ -281,7 +275,7 @@ export function EditField(props: Props){
 </FormControl>
 
 {/* Faculty Select */}
-<FormControl fullWidth sx={{ mt: 2 }}>
+<FormControl size="small" fullWidth sx={{ mt: 2 }}>
   <InputLabel id="faculty-label">Faculty</InputLabel>
   <Select
     labelId="faculty-label"
@@ -300,7 +294,7 @@ export function EditField(props: Props){
 </FormControl>
 
 {/* Subject Select */}
-<FormControl fullWidth sx={{ mt: 2 }}>
+<FormControl size="small"fullWidth sx={{ mt: 2 }}>
   <InputLabel id="subject-label">Subject</InputLabel>
   <Select
     labelId="subject-label"
@@ -319,7 +313,7 @@ export function EditField(props: Props){
 </FormControl>
 
 {/* Form of Study Select */}
-<FormControl fullWidth sx={{ mt: 2 }}>
+<FormControl size="small" fullWidth sx={{ mt: 2 }}>
   <InputLabel id="formOfStudy-label">Form of Study</InputLabel>
   <Select
     labelId="formOfStudy-label"
@@ -338,7 +332,7 @@ export function EditField(props: Props){
 </FormControl>
 
 {/* Duration Select */}
-<FormControl fullWidth sx={{ mt: 2 }}>
+<FormControl size="small" fullWidth sx={{ mt: 2 }}>
   <InputLabel id="duration-label">Duration</InputLabel>
   <Select
     labelId="duration-label"
@@ -357,7 +351,7 @@ export function EditField(props: Props){
 </FormControl>
 
 {/* Qualification Select */}
-<FormControl fullWidth sx={{ mt: 2 }}>
+<FormControl size="small" fullWidth sx={{ mt: 2 }}>
   <InputLabel id="qualification-label">Qualification</InputLabel>
   <Select
     labelId="qualification-label"
@@ -376,7 +370,7 @@ export function EditField(props: Props){
 </FormControl>
 
         </Stack>
-        <Stack gap={4}>
+        <Stack gap={4} width="100%">
         <TextField 
     variant="standard" 
     label="Title" 
@@ -387,15 +381,19 @@ export function EditField(props: Props){
   <TextField 
     variant="outlined" 
     label="Text" 
+    multiline
+    fullWidth
+    disabled
     value={formState.text}
     onChange={(e) => dispatch({ type: EDIT_ACTIONS.text, payload: { text: e.target.value } })}
   />
         </Stack>
-        <Stack gap={4}>
-        <Typography>Proposed Changes:</Typography>
-        </Stack>
           </Stack>
-        <Button fullWidth>Save Changes</Button>
+        <Button sx={{my:2}} fullWidth>Save Changes</Button>
+            <Divider>Proposed Changes:</Divider>
+          <Stack direction="row" gap={4} sx={{mt: 4}}>
+     
+          </Stack>
        
       </Container>
     );

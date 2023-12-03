@@ -23,7 +23,7 @@ async function main() {
   await Promise.all(deleteOperations);
 
   // Users
-  const userRoles = ['Student', 'Professor', 'Department Head', 'Dean', 'Admin'];
+  const userRoles = ['Student', 'Professor', 'Department Head', 'Dean'];
   const createdUsers = [];
   for (const role of userRoles) {
     const createdUser = await prisma.user.create({

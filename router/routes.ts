@@ -1,5 +1,2 @@
-export const publicRoutes = ["/", "/login", "/logout", "/error"]
-export const superuserRoutes = ["/create-project"]
-export const protectedRoutes = [
-  "/profile"
-]
+export const publicRoutes = ["/", "study-plans"]
+export const protectedRoutes = ["/add-plan"]

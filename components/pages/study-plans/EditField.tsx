@@ -255,7 +255,6 @@ export function EditField(props: Props) {
     <Container maxWidth="xl">
       <Stack direction="row" gap={4} sx={{ mt: 4 }}>
         <Stack>
-          {/* Speciality Select */}
           <FormControl size="small" fullWidth sx={{ mt: 2 }}>
             <InputLabel id="speciality-label">Speciality</InputLabel>
             <Select
@@ -281,7 +280,6 @@ export function EditField(props: Props) {
               ))}
             </Select>
           </FormControl>
-          {/* Level Select */}
           <FormControl size="small" fullWidth sx={{ mt: 2 }}>
             <InputLabel id="level-label">Level</InputLabel>
             <Select
@@ -304,8 +302,6 @@ export function EditField(props: Props) {
               ))}
             </Select>
           </FormControl>
-
-          {/* Department Select */}
           <FormControl size="small" fullWidth sx={{ mt: 2 }}>
             <InputLabel id="department-label">Department</InputLabel>
             <Select
@@ -331,8 +327,6 @@ export function EditField(props: Props) {
               ))}
             </Select>
           </FormControl>
-
-          {/* Faculty Select */}
           <FormControl size="small" fullWidth sx={{ mt: 2 }}>
             <InputLabel id="faculty-label">Faculty</InputLabel>
             <Select
@@ -355,8 +349,6 @@ export function EditField(props: Props) {
               ))}
             </Select>
           </FormControl>
-
-          {/* Subject Select */}
           <FormControl size="small" fullWidth sx={{ mt: 2 }}>
             <InputLabel id="subject-label">Subject</InputLabel>
             <Select
@@ -379,8 +371,6 @@ export function EditField(props: Props) {
               ))}
             </Select>
           </FormControl>
-
-          {/* Form of Study Select */}
           <FormControl size="small" fullWidth sx={{ mt: 2 }}>
             <InputLabel id="formOfStudy-label">Form of Study</InputLabel>
             <Select
@@ -403,8 +393,6 @@ export function EditField(props: Props) {
               ))}
             </Select>
           </FormControl>
-
-          {/* Duration Select */}
           <FormControl size="small" fullWidth sx={{ mt: 2 }}>
             <InputLabel id="duration-label">Duration</InputLabel>
             <Select
@@ -430,8 +418,6 @@ export function EditField(props: Props) {
               ))}
             </Select>
           </FormControl>
-
-          {/* Qualification Select */}
           <FormControl size="small" fullWidth sx={{ mt: 2 }}>
             <InputLabel id="qualification-label">Qualification</InputLabel>
             <Select

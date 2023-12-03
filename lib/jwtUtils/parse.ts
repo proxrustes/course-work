@@ -1,11 +1,11 @@
 import { decodeJwt } from "jose"
-import { User } from "../../definitions/types/user"
 import { verify } from "./verify"
+import { user } from "@prisma/client"
 
 export async function parse(token: string) {
   try {
     if (token && (await verify(token))) {
-      const user = decodeJwt(token) as User
+      const user = decodeJwt(token) as user
       return user
     }
     return null

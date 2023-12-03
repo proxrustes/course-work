@@ -1,6 +1,6 @@
 export type Token = {
     name: string
-    id: number
+    user_id: number
     access_level: number
   }
   

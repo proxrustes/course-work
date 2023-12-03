@@ -2,12 +2,13 @@
 import { study_plan } from "@/app/api/study-plan/route";
 import useCurrentUser from "@/hooks/auth/useCurrentUser";
 import {
-  Avatar,
-  Box,
   Button,
   Chip,
   Container,
   Divider,
+  IconButton,
+  List,
+  ListItem,
   ListItemText,
   Stack,
   TextField,
@@ -15,14 +16,38 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline'
+import { plan_change } from "@/app/api/study-plan/[id]/changes/route";
 
 export default function Plan({ params }: { params: { id: string } }) {
-  const [user] = useCurrentUser();
+  const [user] = useCurrentUser()
+  const [changes, setChanges] = useState<plan_change[]>([])
   const router = useRouter();
   const [plan, setPlan] = useState<study_plan>()
+  const [suggestion, setSuggestion] = useState("");
+  const [showSuggestionBox, setShowSuggestionBox] = useState(false)
+  function submitSuggestion(){
+    const payload = {
+      user_id: user?.user_id,
+      change_description: suggestion
+    }
+    if(user?.user_id){
+      fetch(`/api/study-plan/${params.id}/changes`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+      method: "POST",
+    }).then(fetchChanges)
+    console.log(changes)
+    setSuggestion("");
+    setShowSuggestionBox(false);
+    }
+
+  };
   function fetchPlan(){
     fetch(`/api/study-plan/${params.id}`, {
       headers: {
@@ -36,8 +61,23 @@ export default function Plan({ params }: { params: { id: string } }) {
         setPlan(message);
       });
   }
+  function fetchChanges(){
+    fetch(`/api/study-plan/${params.id}/changes`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        const message = json.message;
+        setChanges(message);
+      })
+      console.log("ch", changes)
+  }
+
   useEffect(() => {
-    
+    fetchChanges()
     fetchPlan()
   }, [])
 
@@ -51,10 +91,19 @@ function handleApprove(n: number){
   }).then(fetchPlan)
 }
 
+function handleDelete(n:number){
+  fetch(`/api/plan-change/${n}`, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+    method: "DELETE"
+  }).then(fetchChanges)
+}
+
   return (
     <Container maxWidth="xl">
       {plan && (
-        <Stack direction="row" gap={2} sx={{ mt: 4 }}>
+        <> <Stack direction="row" gap={2} sx={{ mt: 4 }}>
           <Stack
             sx={{
               border: "2px solid #324376",
@@ -118,7 +167,7 @@ function handleApprove(n: number){
                 fullWidth
                 variant="outlined"
                 color="inherit"
-                onClick={() => router.push(`/plan/${plan.plan_id}/edit`)}
+                onClick={() => setShowSuggestionBox(!showSuggestionBox)}
               >
                 Suggest Changes
               </Button>
@@ -138,7 +187,7 @@ function handleApprove(n: number){
             ) : (
               <></>
             )}
-             {plan && user?.access_level && user.access_level == 4 ? (
+             {plan && user?.access_level && user.access_level > 2 ? (
               <Button
                 fullWidth
                 variant="outlined"
@@ -165,7 +214,48 @@ function handleApprove(n: number){
             />
           </Stack>
         </Stack>
+        {showSuggestionBox && (
+            <Stack gap={2} sx={{my: 2}}>
+              <TextField
+                fullWidth
+                multiline
+                variant="outlined"
+                placeholder="Type your suggestion here..."
+                value={suggestion}
+                onChange={(e)=>setSuggestion(e.target.value)}
+              />
+              <Button
+                variant="outlined"
+                color="inherit"
+                onClick={submitSuggestion}
+              >
+                Submit
+              </Button>
+            </Stack>
+          )}
+        <Typography variant="h5" sx={{mt: 4}}>Suggested changes:</Typography>
+        <List>
+            {changes.length > 0 && (
+              changes.map((change) => (
+                <ListItem secondaryAction={
+                user?.access_level && user?.access_level > 2 ?(
+                  <IconButton edge="end" aria-label="delete" onClick={()=>handleDelete(change.change_id)}>
+                    <DeleteIcon />
+                  </IconButton>) : <></>
+                }
+                >
+                  <ListItemText
+                    primary={change.change_description}
+                    secondary={`${change.user.name}: ${change.change_date.toString()}`}
+                  />
+                </ListItem>
+              ))
+            ) }
+          </List>
+      
+        </>
+       
       )}
     </Container>
-  );
+  )
 }

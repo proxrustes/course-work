@@ -169,7 +169,7 @@ export const ACTIONS = {
           });
   }, []);
     return (
-      <Stack sx={{ pl: 2, pb: 2 }}>
+      <Stack sx={{ pl: 2, pb: 2, width: 300 }}>
         <Typography variant="h5" sx={{ pt: 1 }}>
           Filter by:
         </Typography>

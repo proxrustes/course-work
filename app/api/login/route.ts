@@ -27,7 +27,7 @@ export async function POST(req: any) {
     if (db_user) {
       const jwt = await sign(
         {
-          id: db_user.user_id,
+          user_id: db_user.user_id,
           name: db_user.name,
           access_level: db_user.access_level
         },

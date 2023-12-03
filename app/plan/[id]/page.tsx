@@ -22,7 +22,7 @@ import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline'
 export default function Plan({ params }: { params: { id: string } }) {
   const [user] = useCurrentUser();
   const router = useRouter();
-  const [plan, setPlan] = useState<study_plan>();
+  const [plan, setPlan] = useState<study_plan>()
   useEffect(() => {
     fetch(`/api/study-plan/${params.id}`, {
       headers: {
@@ -36,6 +36,15 @@ export default function Plan({ params }: { params: { id: string } }) {
         setPlan(message);
       });
   }, []);
+function handleApprove(n: number){
+  fetch(`/api/study-plan/${params.id}/approve`, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+    method: "PUT",
+    body:  JSON.stringify({is_approved: n})
+  })
+}
 
   return (
     <Container maxWidth="xl">
@@ -43,8 +52,7 @@ export default function Plan({ params }: { params: { id: string } }) {
         <Stack direction="row" gap={2} sx={{ mt: 4 }}>
           <Stack
             sx={{
-              color: "white",
-              backgroundColor: "#324376",
+              border: "2px solid #324376",
               p: 2,
               borderRadius: 2,
               width: 250
@@ -78,7 +86,7 @@ export default function Plan({ params }: { params: { id: string } }) {
             <Typography sx={{fontWeight: 800}}>{plan.speciality.speciality_name}
             </Typography>
             <Divider >
-              <Chip sx={{color:"white", my:2}} label="actions"></Chip>
+              <Chip sx={{ my:2}} label="actions"></Chip>
             </Divider>
             <Stack gap={2}>
 
@@ -106,11 +114,13 @@ export default function Plan({ params }: { params: { id: string } }) {
             ) : (
               <></>
             )}
-             {plan && user?.access_level && user.access_level == 4 ? (
+             {plan && user?.access_level && user.access_level == 4? (
               <Button
                 fullWidth
+                disabled={plan.is_approved === 1 }
                 variant="outlined"
                 color="inherit"
+                onClick={()=>handleApprove(1)}
               >
                 Approve Plan
               </Button>
@@ -134,7 +144,7 @@ export default function Plan({ params }: { params: { id: string } }) {
           <Stack width="100%">
             <Typography variant="h4" sx={{fontWeight: 800}}>
             {plan.is_approved === 1 ? <CheckCircleOutlineIcon/> : <ErrorOutlineIcon/>}
-      {plan.title}</Typography>
+     {" "} {plan.title}</Typography>
             <TextField
               fullWidth
               multiline

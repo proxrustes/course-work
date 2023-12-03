@@ -79,22 +79,11 @@ export default function StudyPlans() {
   }, []);
 
   return (
-    <Container>
+    <Container maxWidth="xl">
       <Typography variant="h2">Study Plans Overview</Typography>
       <Stack direction="row" gap={2}> 
-        <Stack>
-          {" "}
-          <FilterMenu
-            study_plans={filteredPlans}
-            filterState={filterState}
-            dispatchFilter={dispatchFilter}
-          />{" "}
-          {user?.access_level && user?.access_level > 2 && (
-            <Button href="/add-plan">Create Plan</Button>
-          )}
-        </Stack>
+     
         <Stack alignContent="center" width="100%">
-          {" "}
           <List>
             {filteredPlans.length > 0 && (
               filteredPlans.map((plan) => (
@@ -118,6 +107,16 @@ export default function StudyPlans() {
               ))
             ) }
           </List>
+        </Stack>
+        <Stack>
+          <FilterMenu
+            study_plans={filteredPlans}
+            filterState={filterState}
+            dispatchFilter={dispatchFilter}
+          />
+          {user?.access_level && user?.access_level > 2 && (
+            <Button color="inherit" variant="outlined" href="/add-plan">Create Plan</Button>
+          )}
         </Stack>
       </Stack>
     </Container>

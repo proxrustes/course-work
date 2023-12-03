@@ -76,6 +76,15 @@ export default function Plan({ params }: { params: { id: string } }) {
     fetchPlan();
   }, []);
 
+  function handleDeletePlan(n: number){
+    fetch(`/api/study-plan/${n}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "DELETE"
+    }).then(()=> router.push('/study-plans'));
+  }
+
   function handleApprove(n: number) {
     fetch(`/api/study-plan/${params.id}/approve`, {
       headers: {
@@ -184,7 +193,7 @@ export default function Plan({ params }: { params: { id: string } }) {
                   <></>
                 )}
                 {plan && user?.access_level && user.access_level > 2 ? (
-                  <Button fullWidth variant="outlined" color="inherit">
+                  <Button fullWidth variant="outlined" color="inherit" onClick={()=> handleDeletePlan(plan.plan_id)}>
                     Delete Plan
                   </Button>
                 ) : (

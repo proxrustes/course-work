@@ -2,7 +2,22 @@ import { HTTP_RESPONSES } from "@/definitions/enums/httpResponses";
 import { getBody } from "@/lib/apiUtils/getBody";
 import { prisma } from "@/prisma/prismaClient";
 import { NextResponse } from "next/server";
-
+// PUT request to update a plan
+export async function DELETE(
+  req: any,
+  {
+    params
+  }: {
+    params: { id: string }
+  }
+) {
+  const body = await getBody(req)
+  return prisma.study_plan.delete({
+    where: { plan_id: parseInt(params.id) }
+  })
+  .then((res) => NextResponse.json(HTTP_RESPONSES[200](res)))
+  .catch((error) => NextResponse.json(HTTP_RESPONSES[500](error)));
+}
 // PUT request to update a plan
 export async function PUT(
     req: any,
@@ -32,7 +47,7 @@ export async function PUT(
     .then((res) => NextResponse.json(HTTP_RESPONSES[200](res)))
     .catch((error) => NextResponse.json(HTTP_RESPONSES[500](error)));
   }
-  // PUT request to update a plan
+  // GET request to get a plan
   export async function GET(
       req: any,
       {

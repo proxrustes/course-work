@@ -4,7 +4,7 @@ import { study_plan } from "@/app/api/study-plan/route";
 import { EditField } from "@/components/pages/study-plans/EditField";
 import { PlanChanges } from "@/components/pages/study-plans/PlanChanges";
 import useCurrentUser from "@/hooks/auth/useCurrentUser";
-import { Container, Divider, Stack, Typography } from "@mui/material";
+import { Container,  Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
 export default function Plan({ params }: { params: { id: string } }) {

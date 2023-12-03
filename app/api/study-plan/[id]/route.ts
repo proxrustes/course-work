@@ -12,13 +12,20 @@ export async function PUT(
       params: { id: string }
     }
   ) {
-    const body = await getBody(req);
-  
+    const body = await getBody(req)
     return prisma.study_plan.update({
       where: { plan_id: parseInt(params.id) },
       data: {
         text: body.text,
         title: body.title,
+        speciality_id: parseInt(body.speciality_id),
+        level_id: parseInt(body.level_id),
+        department_id: parseInt(body.department_id),
+        faculty_id: parseInt(body.faculty_id),
+        subject_id: parseInt(body.subject_id),
+        form_id: parseInt(body.form_id),
+        duration_id: parseInt(body.duration_id),
+        qualification_id: parseInt(body.qualification_id),
       },
     })
     .then((res) => NextResponse.json(HTTP_RESPONSES[200](res)))

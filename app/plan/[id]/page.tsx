@@ -80,7 +80,9 @@ export default function Plan({ params }: { params: { id: string } }) {
             <Divider >
               <Chip sx={{color:"white", my:2}} label="actions"></Chip>
             </Divider>
-            {plan && user?.access_level && user.access_level > 2 ? (
+            <Stack gap={2}>
+
+                 {plan && user?.access_level && user.access_level > 2 ? (
               <Button
                 fullWidth
                 variant="outlined"
@@ -92,7 +94,7 @@ export default function Plan({ params }: { params: { id: string } }) {
             ) : (
               <></>
             )}
-            {plan && user?.access_level && user.access_level > 1 ? (
+            {plan && user?.access_level && user.access_level == 2 ? (
               <Button
                 fullWidth
                 variant="outlined"
@@ -104,6 +106,30 @@ export default function Plan({ params }: { params: { id: string } }) {
             ) : (
               <></>
             )}
+             {plan && user?.access_level && user.access_level == 4 ? (
+              <Button
+                fullWidth
+                variant="outlined"
+                color="inherit"
+              >
+                Approve Plan
+              </Button>
+            ) : (
+              <></>
+            )}
+             {plan && user?.access_level && user.access_level == 4 ? (
+              <Button
+                fullWidth
+                variant="outlined"
+                color="inherit"
+              >
+                Delete Plan
+              </Button>
+            ) : (
+              <></>
+            )}
+            </Stack>
+         
           </Stack>
           <Stack width="100%">
             <Typography variant="h4" sx={{fontWeight: 800}}>

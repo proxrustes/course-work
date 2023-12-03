@@ -210,6 +210,17 @@ export function EditField(props: Props){
           })
   }, [])
 
+
+  function handleSave(){
+    fetch(`/api/study-plan/${props.study_plan.plan_id}`, {
+      headers: {
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify(formState),
+      method: "PUT",
+  })
+      .then((res) => res.json())
+  }
   if (!formState) {
       return <div>Loading...</div>;
   }
@@ -383,13 +394,12 @@ export function EditField(props: Props){
     label="Text" 
     multiline
     fullWidth
-    disabled
     value={formState.text}
     onChange={(e) => dispatch({ type: EDIT_ACTIONS.text, payload: { text: e.target.value } })}
   />
         </Stack>
           </Stack>
-        <Button sx={{my:2}} fullWidth>Save Changes</Button>
+        <Button sx={{my:2}} fullWidth onClick={handleSave}>Save Changes</Button>
             <Divider>Proposed Changes:</Divider>
           <Stack direction="row" gap={4} sx={{mt: 4}}>
      

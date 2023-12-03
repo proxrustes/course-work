@@ -81,7 +81,7 @@ export default function StudyPlans() {
   return (
     <Container>
       <Typography variant="h2">Study Plans Overview</Typography>
-      <Stack direction="row">
+      <Stack direction="row" gap={2}> 
         <Stack>
           {" "}
           <FilterMenu
@@ -89,11 +89,11 @@ export default function StudyPlans() {
             filterState={filterState}
             dispatchFilter={dispatchFilter}
           />{" "}
-          {user?.access_level && user?.access_level > 1 && (
+          {user?.access_level && user?.access_level > 2 && (
             <Button href="/add-plan">Create Plan</Button>
           )}
         </Stack>
-        <Stack alignContent="center">
+        <Stack alignContent="center" width="100%">
           {" "}
           <List>
             {filteredPlans.length > 0 && (

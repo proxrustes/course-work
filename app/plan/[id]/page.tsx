@@ -55,8 +55,7 @@ export default function Plan({ params }: { params: { id: string } }) {
       .then((json) => {
         const message = json.message;
         setChanges(message);
-      });
-    console.log("ch", changes);
+      })
   }
   function fetchPlan() {
     fetch(`/api/study-plan/${params.id}`, {

@@ -252,7 +252,7 @@ export function EditField(props: Props) {
     return <div>Loading...</div>;
   }
   return (
-    <Container maxWidth="xl">
+    <>
       <Stack direction="row" gap={4} sx={{ mt: 4 }}>
         <Stack>
           <FormControl size="small" fullWidth sx={{ mt: 2,  width: 200 }}>
@@ -475,8 +475,7 @@ export function EditField(props: Props) {
       <Button sx={{ my: 2 }} variant="outlined" color="inherit" fullWidth onClick={handleSave}>
         Save Changes
       </Button>
-      <Divider>Proposed Changes:</Divider>
-      <Stack direction="row" gap={4} sx={{ mt: 4 }}></Stack>
-    </Container>
+    
+    </>
   );
 }

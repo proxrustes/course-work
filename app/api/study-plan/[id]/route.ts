@@ -26,6 +26,7 @@ export async function PUT(
         form_id: parseInt(body.form_id),
         duration_id: parseInt(body.duration_id),
         qualification_id: parseInt(body.qualification_id),
+        is_approved: 0
       },
     })
     .then((res) => NextResponse.json(HTTP_RESPONSES[200](res)))

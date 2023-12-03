@@ -23,7 +23,7 @@ export default function Plan({ params }: { params: { id: string } }) {
   const [user] = useCurrentUser();
   const router = useRouter();
   const [plan, setPlan] = useState<study_plan>()
-  useEffect(() => {
+  function fetchPlan(){
     fetch(`/api/study-plan/${params.id}`, {
       headers: {
         "Content-Type": "application/json",
@@ -35,7 +35,12 @@ export default function Plan({ params }: { params: { id: string } }) {
         const message = json.message;
         setPlan(message);
       });
-  }, []);
+  }
+  useEffect(() => {
+    
+    fetchPlan()
+  }, [])
+
 function handleApprove(n: number){
   fetch(`/api/study-plan/${params.id}/approve`, {
     headers: {
@@ -43,7 +48,7 @@ function handleApprove(n: number){
     },
     method: "PUT",
     body:  JSON.stringify({is_approved: n})
-  })
+  }).then(fetchPlan)
 }
 
   return (
@@ -58,7 +63,7 @@ function handleApprove(n: number){
               width: 250
             }}
           >
-            <Typography variant="button" sx={{mt:2}}>Subject:</Typography>
+            <Typography variant="button">Subject:</Typography>
             <Typography sx={{fontWeight: 800}}>
           {plan.subject.subject_name}</Typography>
             
@@ -85,9 +90,15 @@ function handleApprove(n: number){
             </Typography>
             <Typography sx={{fontWeight: 800}}>{plan.speciality.speciality_name}
             </Typography>
-            <Divider >
-              <Chip sx={{ my:2}} label="actions"></Chip>
-            </Divider>
+            
+            {plan && user?.access_level && user.access_level > 1 ? (
+               <Divider >
+               <Chip sx={{ my:2}} label="actions"></Chip>
+             </Divider>
+            ) : (
+              <></>
+            )}
+           
             <Stack gap={2}>
 
                  {plan && user?.access_level && user.access_level > 2 ? (
@@ -141,7 +152,7 @@ function handleApprove(n: number){
             </Stack>
          
           </Stack>
-          <Stack width="100%">
+          <Stack width="100%" gap={2}>
             <Typography variant="h4" sx={{fontWeight: 800}}>
             {plan.is_approved === 1 ? <CheckCircleOutlineIcon/> : <ErrorOutlineIcon/>}
      {" "} {plan.title}</Typography>

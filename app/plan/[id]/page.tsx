@@ -37,8 +37,7 @@ export default function Plan({ params }: { params: { id: string } }) {
         },
         body: JSON.stringify(payload),
         method: "POST",
-      });
-      fetchChanges();
+      }).then(fetchChanges)
       setSuggestion("");
       setShowSuggestionBox(false);
     }

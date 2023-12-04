@@ -75,7 +75,7 @@ export default function Home() {
 
   return (
     <Container>
-      <Typography variant="h1">Study Plans</Typography>
+      <Typography variant="h1">Навчальні Плани</Typography>
       <Typography variant="button">Log in as:</Typography>
       <Stack direction="row" justifyContent="center" gap={1} flexWrap="wrap">
         {users

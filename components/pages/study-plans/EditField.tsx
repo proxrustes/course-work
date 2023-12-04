@@ -256,7 +256,7 @@ export function EditField(props: Props) {
       <Stack direction="row" gap={4} sx={{ mt: 4 }}>
         <Stack>
           <FormControl size="small" fullWidth sx={{ mt: 2,  width: 200 }}>
-            <InputLabel id="speciality-label">Speciality</InputLabel>
+            <InputLabel id="speciality-label">Спеціальність</InputLabel>
             <Select
               labelId="speciality-label"
               id="speciality-select"
@@ -267,7 +267,7 @@ export function EditField(props: Props) {
                   payload: { speciality_id: e.target.value },
                 })
               }
-              input={<OutlinedInput label="Speciality" />}
+              input={<OutlinedInput label="Спеціальність" />}
               MenuProps={MenuProps}
             >
               {specialities.map((speciality) => (
@@ -281,7 +281,7 @@ export function EditField(props: Props) {
             </Select>
           </FormControl>
           <FormControl size="small" fullWidth sx={{ mt: 2 }}>
-            <InputLabel id="level-label">Level</InputLabel>
+            <InputLabel id="level-label">Рівень</InputLabel>
             <Select
               labelId="level-label"
               id="level-select"
@@ -292,7 +292,7 @@ export function EditField(props: Props) {
                   payload: { level_id: e.target.value },
                 })
               }
-              input={<OutlinedInput label="Level" />}
+              input={<OutlinedInput label="Рівень" />}
               MenuProps={MenuProps}
             >
               {levels.map((level) => (
@@ -303,7 +303,7 @@ export function EditField(props: Props) {
             </Select>
           </FormControl>
           <FormControl size="small" fullWidth sx={{ mt: 2 }}>
-            <InputLabel id="department-label">Department</InputLabel>
+            <InputLabel id="department-label">Катедра</InputLabel>
             <Select
               labelId="department-label"
               id="department-select"
@@ -314,7 +314,7 @@ export function EditField(props: Props) {
                   payload: { department_id: e.target.value },
                 })
               }
-              input={<OutlinedInput label="Department" />}
+              input={<OutlinedInput label="Катедра" />}
               MenuProps={MenuProps}
             >
               {departments.map((department) => (
@@ -328,7 +328,7 @@ export function EditField(props: Props) {
             </Select>
           </FormControl>
           <FormControl size="small" fullWidth sx={{ mt: 2 }}>
-            <InputLabel id="faculty-label">Faculty</InputLabel>
+            <InputLabel id="faculty-label">Факультет</InputLabel>
             <Select
               labelId="faculty-label"
               id="faculty-select"
@@ -339,7 +339,7 @@ export function EditField(props: Props) {
                   payload: { faculty_id: e.target.value },
                 })
               }
-              input={<OutlinedInput label="Faculty" />}
+              input={<OutlinedInput label="Факультет" />}
               MenuProps={MenuProps}
             >
               {faculties.map((faculty) => (
@@ -350,7 +350,7 @@ export function EditField(props: Props) {
             </Select>
           </FormControl>
           <FormControl size="small" fullWidth sx={{ mt: 2 }}>
-            <InputLabel id="subject-label">Subject</InputLabel>
+            <InputLabel id="subject-label">Предмет</InputLabel>
             <Select
               labelId="subject-label"
               id="subject-select"
@@ -361,7 +361,7 @@ export function EditField(props: Props) {
                   payload: { subject_id: e.target.value },
                 })
               }
-              input={<OutlinedInput label="Subject" />}
+              input={<OutlinedInput label="Предмет" />}
               MenuProps={MenuProps}
             >
               {subjects.map((subject) => (
@@ -372,7 +372,7 @@ export function EditField(props: Props) {
             </Select>
           </FormControl>
           <FormControl size="small" fullWidth sx={{ mt: 2 }}>
-            <InputLabel id="formOfStudy-label">Form of Study</InputLabel>
+            <InputLabel id="formOfStudy-label">Форма навчання</InputLabel>
             <Select
               labelId="formOfStudy-label"
               id="formOfStudy-select"
@@ -383,7 +383,7 @@ export function EditField(props: Props) {
                   payload: { form_id: e.target.value },
                 })
               }
-              input={<OutlinedInput label="Form of Study" />}
+              input={<OutlinedInput label="Форма навчання" />}
               MenuProps={MenuProps}
             >
               {formOfStudy.map((form) => (
@@ -394,7 +394,7 @@ export function EditField(props: Props) {
             </Select>
           </FormControl>
           <FormControl size="small" fullWidth sx={{ mt: 2 }}>
-            <InputLabel id="duration-label">Duration</InputLabel>
+            <InputLabel id="duration-label">Тривалість</InputLabel>
             <Select
               labelId="duration-label"
               id="duration-select"
@@ -405,7 +405,7 @@ export function EditField(props: Props) {
                   payload: { duration_id: e.target.value },
                 })
               }
-              input={<OutlinedInput label="Duration" />}
+              input={<OutlinedInput label="Тривалість" />}
               MenuProps={MenuProps}
             >
               {durations.map((duration) => (
@@ -419,7 +419,7 @@ export function EditField(props: Props) {
             </Select>
           </FormControl>
           <FormControl size="small" fullWidth sx={{ mt: 2 }}>
-            <InputLabel id="qualification-label">Qualification</InputLabel>
+            <InputLabel id="qualification-label">Кваліфікація</InputLabel>
             <Select
               labelId="qualification-label"
               id="qualification-select"
@@ -430,7 +430,7 @@ export function EditField(props: Props) {
                   payload: { qualification_id: e.target.value },
                 })
               }
-              input={<OutlinedInput label="Qualification" />}
+              input={<OutlinedInput label="Кваліфікація" />}
               MenuProps={MenuProps}
             >
               {qualifications.map((qualification) => (
@@ -447,7 +447,7 @@ export function EditField(props: Props) {
         <Stack gap={4} width="100%">
           <TextField
             variant="standard"
-            label="Title"
+            label="Назва"
             value={formState.title}
             onChange={(e) =>
               dispatch({
@@ -459,7 +459,7 @@ export function EditField(props: Props) {
 
           <TextField
             variant="outlined"
-            label="Text"
+            label="Зміст"
             multiline
             fullWidth
             value={formState.text}
@@ -473,7 +473,7 @@ export function EditField(props: Props) {
         </Stack>
       </Stack>
       <Button sx={{ my: 2 }} variant="outlined" color="inherit" fullWidth onClick={handleSave}>
-        Save Changes
+        Зберегти зміни
       </Button>
     
     </>

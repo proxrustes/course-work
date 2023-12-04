@@ -54,7 +54,7 @@ export default function Plan({ params }: { params: { id: string } }) {
         <Container maxWidth="xl">
           <EditField study_plan={plan} />
           <Typography variant="h5" sx={{ mt: 4 }}>
-            Suggested changes:
+            Запропоновані зміни:
           </Typography>
           <PlanChanges
             fetchChanges={fetchChanges}

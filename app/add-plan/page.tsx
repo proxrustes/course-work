@@ -195,158 +195,169 @@ export default function AddPlan() {
   };
 
   return user?.access_level && user.access_level > 2 ? (
-    <Container>
+    <Container maxWidth="xl">
       <Typography variant="h2">Add Study Plan</Typography>
-      <Stack gap={4}>
-        <TextField
-          label="Title"
-          variant="outlined"
-          fullWidth
-          value={title}
-          onChange={(e: any) => setTitle(e.target.value)}
-        />{" "}
-        <TextField
-          label="Text"
-          variant="outlined"
-          fullWidth
-          multiline
-          rows={4}
-          value={text}
-          onChange={(e: any) => setText(e.target.value)}
-        />
-        <FormControl fullWidth>
-          <InputLabel id="subject-label">Select Subject</InputLabel>
-          <Select
-            labelId="subject-label"
-            label="Select Subject"
-            value={selectedSubject}
-            onChange={(e) => setSelectedSubject(e.target.value)}
-          >
-            {subjects.map((subject) => (
-              <MenuItem key={subject.subject_id} value={subject.subject_id}>
-                {subject.subject_name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <FormControl fullWidth>
-          <InputLabel id="duration-label">Select Duration</InputLabel>
-          <Select
-            labelId="duration-label"
-            label="Select Duration"
-            value={selectedDuration}
-            onChange={(e) => setSelectedDuration(e.target.value)}
-          >
-            {durations.map((duration) => (
-              <MenuItem key={duration.duration_id} value={duration.duration_id}>
-                {duration.duration_length}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <FormControl fullWidth>
-          <InputLabel id="formOfStudy-label">Select Form of Study</InputLabel>
-          <Select
-            labelId="formOfStudy-label"
-            label="Select Form of Study"
-            value={selectedFormOfStudy}
-            onChange={(e) => setSelectedFormOfStudy(e.target.value)}
-          >
-            {formOfStudy.map((form) => (
-              <MenuItem key={form.form_id} value={form.form_id}>
-                {form.form_name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <FormControl fullWidth>
-          <InputLabel id="speciality-label">Select Speciality</InputLabel>
-          <Select
-            labelId="speciality-label"
-            label="Select Speciality"
-            value={selectedSpeciality}
-            onChange={(e) => setSelectedSpeciality(e.target.value)}
-          >
-            {specialities.map((speciality) => (
-              <MenuItem
-                key={speciality.speciality_id}
-                value={speciality.speciality_id}
-              >
-                {speciality.speciality_name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <FormControl fullWidth>
-          <InputLabel id="level-label">Select Level</InputLabel>
-          <Select
-            labelId="level-label"
-            label="Select Level"
-            value={selectedLevel}
-            onChange={(e) => setSelectedLevel(e.target.value)}
-          >
-            {levels.map((level) => (
-              <MenuItem key={level.level_id} value={level.level_id}>
-                {level.level_name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <FormControl fullWidth>
-          <InputLabel id="department-label">Select Department</InputLabel>
-          <Select
-            labelId="department-label"
-            label="Select Department"
-            value={selectedDepartment}
-            onChange={(e) => setSelectedDepartment(e.target.value)}
-          >
-            {departments.map((department) => (
-              <MenuItem
-                key={department.department_id}
-                value={department.department_id}
-              >
-                {department.department_name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <FormControl fullWidth>
-          <InputLabel id="faculty-label">Select Faculty</InputLabel>
-          <Select
-            labelId="faculty-label"
-            label="Select Faculty"
-            value={selectedFaculty}
-            onChange={(e) => setSelectedFaculty(e.target.value)}
-          >
-            {faculties.map((faculty) => (
-              <MenuItem key={faculty.faculty_id} value={faculty.faculty_id}>
-                {faculty.faculty_name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <FormControl fullWidth>
-          <InputLabel id="qualification-label">Select Qualification</InputLabel>
-          <Select
-            labelId="qualification-label"
-            label="Select Qualification"
-            value={selectedQualification}
-            onChange={(e) => setSelectedQualification(e.target.value)}
-          >
-            {qualifications.map((qualification) => (
-              <MenuItem
-                key={qualification.qualification_id}
-                value={qualification.qualification_id}
-              >
-                {qualification.qualification_name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <Button variant="contained" onClick={handleSubmit}>
-          Submit
-        </Button>
+      <Stack direction="row" gap={4} sx={{ mt: 4 }}>
+        <Stack gap={1}>
+          <FormControl fullWidth size="small" sx={{ width: 300 }}>
+            <InputLabel id="subject-label">Select Subject</InputLabel>
+            <Select
+              labelId="subject-label"
+              label="Select Subject"
+              value={selectedSubject}
+              onChange={(e) => setSelectedSubject(e.target.value)}
+            >
+              {subjects.map((subject) => (
+                <MenuItem key={subject.subject_id} value={subject.subject_id}>
+                  {subject.subject_name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <FormControl fullWidth size="small" sx={{ width: 300 }}>
+            <InputLabel id="duration-label">Select Duration</InputLabel>
+            <Select
+              labelId="duration-label"
+              label="Select Duration"
+              value={selectedDuration}
+              onChange={(e) => setSelectedDuration(e.target.value)}
+            >
+              {durations.map((duration) => (
+                <MenuItem
+                  key={duration.duration_id}
+                  value={duration.duration_id}
+                >
+                  {duration.duration_length}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <FormControl fullWidth size="small" sx={{ width: 300 }}>
+            <InputLabel id="formOfStudy-label">Select Form of Study</InputLabel>
+            <Select
+              labelId="formOfStudy-label"
+              label="Select Form of Study"
+              value={selectedFormOfStudy}
+              onChange={(e) => setSelectedFormOfStudy(e.target.value)}
+            >
+              {formOfStudy.map((form) => (
+                <MenuItem key={form.form_id} value={form.form_id}>
+                  {form.form_name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <FormControl fullWidth size="small" sx={{ width: 300 }}>
+            <InputLabel id="speciality-label">Select Speciality</InputLabel>
+            <Select
+              labelId="speciality-label"
+              label="Select Speciality"
+              value={selectedSpeciality}
+              onChange={(e) => setSelectedSpeciality(e.target.value)}
+            >
+              {specialities.map((speciality) => (
+                <MenuItem
+                  key={speciality.speciality_id}
+                  value={speciality.speciality_id}
+                >
+                  {speciality.speciality_name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <FormControl fullWidth size="small" sx={{ width: 300 }}>
+            <InputLabel id="level-label">Select Level</InputLabel>
+            <Select
+              labelId="level-label"
+              label="Select Level"
+              value={selectedLevel}
+              onChange={(e) => setSelectedLevel(e.target.value)}
+            >
+              {levels.map((level) => (
+                <MenuItem key={level.level_id} value={level.level_id}>
+                  {level.level_name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <FormControl fullWidth size="small" sx={{ width: 300 }}>
+            <InputLabel id="department-label">Select Department</InputLabel>
+            <Select
+              labelId="department-label"
+              label="Select Department"
+              value={selectedDepartment}
+              onChange={(e) => setSelectedDepartment(e.target.value)}
+            >
+              {departments.map((department) => (
+                <MenuItem
+                  key={department.department_id}
+                  value={department.department_id}
+                >
+                  {department.department_name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <FormControl fullWidth size="small" sx={{ width: 300 }}>
+            <InputLabel id="faculty-label">Select Faculty</InputLabel>
+            <Select
+              labelId="faculty-label"
+              label="Select Faculty"
+              value={selectedFaculty}
+              onChange={(e) => setSelectedFaculty(e.target.value)}
+            >
+              {faculties.map((faculty) => (
+                <MenuItem key={faculty.faculty_id} value={faculty.faculty_id}>
+                  {faculty.faculty_name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <FormControl fullWidth size="small" sx={{ width: 300 }}>
+            <InputLabel id="qualification-label">
+              Select Qualification
+            </InputLabel>
+            <Select
+              labelId="qualification-label"
+              label="Select Qualification"
+              value={selectedQualification}
+              onChange={(e) => setSelectedQualification(e.target.value)}
+            >
+              {qualifications.map((qualification) => (
+                <MenuItem
+                  key={qualification.qualification_id}
+                  value={qualification.qualification_id}
+                >
+                  {qualification.qualification_name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <Button variant="outlined" color="inherit" fullWidth onClick={handleSubmit}>
+        Submit
+      </Button>
+        </Stack>
+        <Stack gap={4} width="100%">
+          <TextField
+            label="Title"
+            variant="outlined"
+            fullWidth
+            size="small"
+            value={title}
+            onChange={(e: any) => setTitle(e.target.value)}
+          />{" "}
+          <TextField
+            label="Text"
+            variant="outlined"
+            fullWidth
+            multiline
+            rows={4}
+            value={text}
+            onChange={(e: any) => setText(e.target.value)}
+          />
+        </Stack>
       </Stack>
+     
     </Container>
   ) : (
     <></>

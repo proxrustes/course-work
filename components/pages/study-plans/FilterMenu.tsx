@@ -171,11 +171,11 @@ export const ACTIONS = {
     return (
       <Stack sx={{pb: 2, width: 300 }}>
         <Typography variant="h5" sx={{ pt: 1 }}>
-          Filter by:
+          Сортувати за:
         </Typography>
         <Divider orientation="horizontal" flexItem />
         <FormControl size="small" fullWidth sx={{ mt: 2 }}>
-        <InputLabel id="speciality-label">Speciality</InputLabel>
+        <InputLabel id="speciality-label">Спеціальність</InputLabel>
         <Select
           labelId="speciality-label"
           id="speciality-select"
@@ -187,7 +187,7 @@ export const ACTIONS = {
               payload: { speciality_id: e.target.value as number[] },
             })
           }
-          input={<OutlinedInput label="Speciality" />}
+          input={<OutlinedInput label="Спеціальність" />}
           MenuProps={MenuProps}
         >
           {specialities.map((speciality) => (
@@ -198,7 +198,7 @@ export const ACTIONS = {
         </Select>
       </FormControl>
       <FormControl size="small" fullWidth sx={{ mt: 2 }}>
-        <InputLabel id="level-label">Level</InputLabel>
+        <InputLabel id="level-label">Рівень</InputLabel>
         <Select
           labelId="level-label"
           id="level-select"
@@ -210,7 +210,7 @@ export const ACTIONS = {
               payload: { level_id: e.target.value as number[] },
             })
           }
-          input={<OutlinedInput label="Level" />}
+          input={<OutlinedInput label="Рівень" />}
           MenuProps={MenuProps}
         >
           {levels.map((level) => (
@@ -221,7 +221,7 @@ export const ACTIONS = {
         </Select>
       </FormControl>
         <FormControl size="small" fullWidth sx={{ mt: 2 }}>
-        <InputLabel id="department-label">Department</InputLabel>
+        <InputLabel id="department-label">Катедра</InputLabel>
         <Select
           labelId="department-label"
           id="department-select"
@@ -233,7 +233,7 @@ export const ACTIONS = {
               payload: { department_id: e.target.value as number[] },
             })
           }
-          input={<OutlinedInput label="Department" />}
+          input={<OutlinedInput label="Катедра" />}
           MenuProps={MenuProps}
         >
           {departments.map((department) => (
@@ -245,7 +245,7 @@ export const ACTIONS = {
       </FormControl>
   {/* Select for Subjects */}
   <FormControl fullWidth size="small" sx={{ mt: 2 }}>
-        <InputLabel id="subject-label">Subject</InputLabel>
+        <InputLabel id="subject-label">Предмет</InputLabel>
         <Select
           labelId="subject-label"
           id="subject-select"
@@ -257,7 +257,7 @@ export const ACTIONS = {
               payload: { subject_id: e.target.value as number[] },
             })
           }
-          input={<OutlinedInput label="Subject" />}
+          input={<OutlinedInput label="Предмет" />}
           MenuProps={MenuProps}
         >
           {subjects.map((subject) => (
@@ -270,7 +270,7 @@ export const ACTIONS = {
 
       {/* Select for Durations */}
       <FormControl size="small" fullWidth sx={{ mt: 2 }}>
-        <InputLabel id="duration-label">Duration</InputLabel>
+        <InputLabel id="duration-label">Тривалість</InputLabel>
         <Select
           labelId="duration-label"
           id="duration-select"
@@ -282,7 +282,7 @@ export const ACTIONS = {
               payload: { duration_id: e.target.value as number[] },
             })
           }
-          input={<OutlinedInput label="Duration" />}
+          input={<OutlinedInput label="Тривалість" />}
           MenuProps={MenuProps}
         >
           {durations.map((duration) => (
@@ -295,7 +295,7 @@ export const ACTIONS = {
 
       {/* Select for Forms of Study */}
       <FormControl fullWidth size="small" sx={{ mt: 2 }}>
-        <InputLabel id="formOfStudy-label">Form of Study</InputLabel>
+        <InputLabel id="formOfStudy-label">Форма навчання</InputLabel>
         <Select
           labelId="formOfStudy-label"
           id="formOfStudy-select"
@@ -307,7 +307,7 @@ export const ACTIONS = {
               payload: { form_id: e.target.value as number[] },
             })
           }
-          input={<OutlinedInput label="Form of Study" />}
+          input={<OutlinedInput label="Форма навчання" />}
           MenuProps={MenuProps}
         >
           {formOfStudy.map((form) => (
@@ -318,7 +318,7 @@ export const ACTIONS = {
         </Select>
       </FormControl>
       <FormControl fullWidth size="small" sx={{ mt: 2 }}>
-        <InputLabel id="faculty-label">Faculty</InputLabel>
+        <InputLabel id="faculty-label">Факультет</InputLabel>
         <Select
           labelId="faculty-label"
           id="faculty-select"
@@ -330,7 +330,7 @@ export const ACTIONS = {
               payload: { faculty_id: e.target.value as number[] },
             })
           }
-          input={<OutlinedInput label="Faculty" />}
+          input={<OutlinedInput label="Факультет" />}
           MenuProps={MenuProps}
         >
           {faculties.map((faculty) => (
@@ -341,7 +341,7 @@ export const ACTIONS = {
         </Select>
       </FormControl>
       <FormControl fullWidth size="small" sx={{ mt: 2 }}>
-        <InputLabel id="qualification-label">Qualification</InputLabel>
+        <InputLabel id="qualification-label">Кваліфікація</InputLabel>
         <Select
           labelId="qualification-label"
           id="qualification-select"
@@ -353,7 +353,7 @@ export const ACTIONS = {
               payload: { qualification_id: e.target.value as number[] },
             })
           }
-          input={<OutlinedInput label="Qualification" />}
+          input={<OutlinedInput label="Кваліфікація" />}
           MenuProps={MenuProps}
         >
           {qualifications.map((qualification) => (
@@ -364,7 +364,7 @@ export const ACTIONS = {
         </Select>
       </FormControl>
         <RadioGroupComponent
-          title="Is Approved"
+          title="затверджені плани"
           actionType={ACTIONS.is_approved}
           filterState={props.filterState.is_approved}
           dispatchFilter={props.dispatchFilter}

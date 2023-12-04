@@ -108,38 +108,38 @@ export default function Plan({ params }: { params: { id: string } }) {
                 width: 250,
               }}
             >
-              <Typography variant="button">Subject:</Typography>
+              <Typography variant="button">Предмет:</Typography>
               <Typography sx={{ fontWeight: 800 }}>
                 {plan.subject.subject_name}
               </Typography>
 
               <Typography variant="button" sx={{ mt: 2 }}>
-                Duration:
+                Тривалість:
               </Typography>
               <Typography sx={{ fontWeight: 800 }}>
-                {plan.duration.duration_length} yrs
+                {plan.duration.duration_length} сем.
               </Typography>
               <Typography variant="button" sx={{ mt: 2 }}>
-                Department
+                Катедра
               </Typography>
               <Typography sx={{ fontWeight: 800 }}>
                 {plan.department.department_name}
               </Typography>
               <Typography variant="button" sx={{ mt: 2 }}>
-                Level
+                Рівень
               </Typography>
               <Typography sx={{ fontWeight: 800 }}>
                 {plan.level.level_name}
               </Typography>
               <Typography variant="button" sx={{ mt: 2 }}>
-                Qualification
+                Кваліфікація
               </Typography>
               <Typography sx={{ fontWeight: 800 }}>
                 {" "}
                 {plan.qualification.qualification_name}
               </Typography>
               <Typography variant="button" sx={{ mt: 2 }}>
-                Department
+                Спеціальність
               </Typography>
               <Typography sx={{ fontWeight: 800 }}>
                 {plan.speciality.speciality_name}
@@ -147,7 +147,7 @@ export default function Plan({ params }: { params: { id: string } }) {
 
               {plan && user?.access_level && user.access_level > 1 ? (
                 <Divider>
-                  <Chip sx={{ my: 2 }} label="actions"></Chip>
+                  <Chip sx={{ my: 2 }} label="дії"></Chip>
                 </Divider>
               ) : (
                 <></>
@@ -161,7 +161,7 @@ export default function Plan({ params }: { params: { id: string } }) {
                     color="inherit"
                     onClick={() => router.push(`/plan/${plan.plan_id}/edit`)}
                   >
-                    Edit Plan
+                    Редагувати план
                   </Button>
                 ) : (
                   <></>
@@ -173,7 +173,7 @@ export default function Plan({ params }: { params: { id: string } }) {
                     color="inherit"
                     onClick={() => setShowSuggestionBox(!showSuggestionBox)}
                   >
-                    Suggest Changes
+                    Запропонувати зміни
                   </Button>
                 ) : (
                   <></>
@@ -186,14 +186,14 @@ export default function Plan({ params }: { params: { id: string } }) {
                     color="inherit"
                     onClick={() => handleApprove(1)}
                   >
-                    Approve Plan
+                    Затвердити план
                   </Button>
                 ) : (
                   <></>
                 )}
                 {plan && user?.access_level && user.access_level > 2 ? (
                   <Button fullWidth variant="outlined" color="inherit" onClick={()=> handleDeletePlan(plan.plan_id)}>
-                    Delete Plan
+                    Видалити план
                   </Button>
                 ) : (
                   <></>
@@ -233,12 +233,12 @@ export default function Plan({ params }: { params: { id: string } }) {
                 color="inherit"
                 onClick={submitSuggestion}
               >
-                Submit
+                відправити
               </Button>
             </Stack>
           )}
           <Typography variant="h5" sx={{ mt: 4 }}>
-            Suggested changes:
+            Запропоновані зміни:
           </Typography>
           <PlanChanges
             fetchChanges={fetchChanges}

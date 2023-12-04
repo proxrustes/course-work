@@ -21,9 +21,9 @@ export function RadioGroupComponent({
   }[filterState];
 
   const marks = [
-    { value: 0, label: "Show All" },
-    { value: 1, label: `Hide ${title}` },
-    { value: 2, label: `${title} Only` }
+    { value: 0, label: "Показати всі" },
+    { value: 1, label: `Приховати ${title}` },
+    { value: 2, label: `Тільки ${title}` }
   ];
 
   return (

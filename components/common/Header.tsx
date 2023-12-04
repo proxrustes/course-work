@@ -1,22 +1,28 @@
-"use client"
+"use client";
 
-import { Box, Button, Stack } from "@mui/material";
-import Cookies from "js-cookie"
+import { Breadcrumbs, Button, Divider, Stack } from "@mui/material";
+import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 
-export function Header(){
-    const router = useRouter()
-    function handleLogout(){
-    
-      Cookies.remove("currentUser")
-      router.push("/")
-    }
-    return(
-        <Stack direction="row">
-       <Button color="secondary" variant="text" onClick={handleLogout}>
-              Logout
-            </Button>
-            <Button href="/study-plans">Plans Overview</Button>
+export function Header() {
+  const router = useRouter();
+  function handleLogout() {
+    Cookies.remove("currentUser");
+    router.push("/");
+  }
+  return (
+    <>
+      <Stack direction="row">
+        <Breadcrumbs aria-label="breadcrumb">
+          <Button color="inherit" variant="text" onClick={handleLogout}>
+            Вийти
+          </Button>
+          <Button color="inherit" variant="text" href="/study-plans">
+            Перегляд планів
+          </Button>
+        </Breadcrumbs>
       </Stack>
-    )
+      <Divider />
+    </>
+  );
 }

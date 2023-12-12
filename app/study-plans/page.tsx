@@ -100,7 +100,7 @@ export default function StudyPlans() {
                   </ListItemAvatar>
                   <ListItemText
                     primary={plan.title}
-                    secondary={plan.subject.subject_name}
+                    secondary={`${plan.faculty.faculty_name}, ${plan.department.department_name}: ${plan.subject.subject_name}`}
                   />
                 </ListItemButton>
               ))

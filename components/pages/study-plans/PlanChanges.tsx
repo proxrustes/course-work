@@ -2,7 +2,7 @@ import { List, ListItem, IconButton, ListItemText } from "@mui/material";
 import { user } from "@prisma/client";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { plan_change } from "@/app/api/study-plan/[id]/changes/route";
-
+import Cookies from "js-cookie"
 export function PlanChanges(props: {
   changes: plan_change[];
   planId: number;
@@ -13,6 +13,7 @@ export function PlanChanges(props: {
     fetch(`/api/plan-change/${n}`, {
       headers: {
         "Content-Type": "application/json",
+        "token": Cookies.get("currentUser") ?? ''
       },
       method: "DELETE",
     }).then(() => {

@@ -17,5 +17,4 @@ export function filterPlans(plans: study_plan[], filterState: FilterState): stud
     .filter((plan) => filterState.subject_id.length === 0 || filterState.subject_id.includes(plan.subject.subject_id))
     .filter((plan) => filterState.form_id.length === 0 || filterState.form_id.includes(plan.form.form_id))
     .filter((plan) => filterState.duration_id.length === 0 || filterState.duration_id.includes(plan.duration.duration_id))
-    .filter((plan) => filterState.qualification_id.length === 0 || filterState.qualification_id.includes(plan.qualification.qualification_id));
 }

@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-
+import Cookies from "js-cookie"
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { plan_change } from "@/app/api/study-plan/[id]/changes/route";
@@ -79,6 +79,7 @@ export default function Plan({ params }: { params: { id: string } }) {
     fetch(`/api/study-plan/${n}`, {
       headers: {
         "Content-Type": "application/json",
+        "token": Cookies.get("currentUser") ?? ''
       },
       method: "DELETE"
     }).then(()=> router.push('/study-plans'));
@@ -88,6 +89,7 @@ export default function Plan({ params }: { params: { id: string } }) {
     fetch(`/api/study-plan/${params.id}/approve`, {
       headers: {
         "Content-Type": "application/json",
+        "token": Cookies.get("currentUser") ?? ''
       },
       method: "PUT",
       body: JSON.stringify({ is_approved: n }),
@@ -130,9 +132,6 @@ export default function Plan({ params }: { params: { id: string } }) {
               </Typography>
               <Typography sx={{ fontWeight: 800 }}>
                 {plan.level.level_name}
-              </Typography>
-              <Typography variant="button" sx={{ mt: 2 }}>
-                Кваліфікація
               </Typography>
               <Typography variant="button" sx={{ mt: 2 }}>
                 Спеціальність

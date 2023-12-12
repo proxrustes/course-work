@@ -1,5 +1,6 @@
 import { HTTP_RESPONSES } from "@/definitions/enums/httpResponses";
 import { getBody } from "@/lib/apiUtils/getBody";
+import { getHeader } from "@/lib/apiUtils/getHeader";
 import { prisma } from "@/prisma/prismaClient";
 import { NextResponse } from "next/server";
 
@@ -75,27 +76,38 @@ export async function GET(req: any) {
   .catch((error) => NextResponse.json(HTTP_RESPONSES[500](error)));
 }
 
-
-
   // POST request to create a new study plan
-export async function POST(req: any) {
-  const body = await getBody(req);
-
-  return prisma.study_plan.create({
-    data: {
-      is_approved: body.is_approved,
-      speciality_id: body.speciality_id,
-      level_id: body.level_id,
-      department_id: body.department_id,
-      faculty_id: body.faculty_id,
-      subject_id: body.subject_id,
-      form_id: body.form_id,
-      duration_id: body.duration_id,
-      creation_date: new Date(), 
-      title: body.title,
-      text: body.text
-    },
-  })
-  .then((res) => NextResponse.json(HTTP_RESPONSES[200](res)))
-  .catch((error) => NextResponse.json(HTTP_RESPONSES[500](error)));
-}
+  export async function POST(req: any) {
+    try {
+      const body = await getBody(req);
+      const token = await getHeader(req, "token")
+       console.log(token)
+      const plan = await prisma.study_plan.create({
+        data: {
+          is_approved: body.is_approved,
+          speciality_id: body.speciality_id,
+          level_id: body.level_id,
+          department_id: body.department_id,
+          faculty_id: body.faculty_id,
+          subject_id: body.subject_id,
+          form_id: body.form_id,
+          duration_id: body.duration_id,
+          creation_date: new Date(),
+          title: body.title,
+          text: body.text
+        },
+      });
+  
+      await prisma.action_log.create({
+        data: {
+          action: "CREATE",
+          user_id: parseInt(body.user_id),
+          additional_info: `plan id: ${plan.plan_id}`
+        }
+      });
+      return NextResponse.json(HTTP_RESPONSES[200](plan));
+    } catch (error) {
+      return NextResponse.json(HTTP_RESPONSES[500](error));
+    }
+  }
+  

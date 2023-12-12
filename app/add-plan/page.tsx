@@ -1,4 +1,5 @@
 "use client";
+import Cookies from "js-cookie"
 import { ERROR_TYPES } from "@/definitions/enums/errors";
 import useCurrentUser from "@/hooks/auth/useCurrentUser";
 import {
@@ -158,6 +159,7 @@ export default function AddPlan() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "token": Cookies.get("currentUser") ?? ''
         },
         body: JSON.stringify({
           is_approved: 0,
@@ -170,7 +172,7 @@ export default function AddPlan() {
           duration_id: selectedDuration,
           creation_date: new Date(),
           title: title,
-          text: text,
+          text: text
         }),
       }).then(() => router.push("/study-plans"));
     } catch (error) {

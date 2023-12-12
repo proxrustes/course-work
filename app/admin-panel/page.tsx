@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { Fragment, JSXElementConstructor, Key, PromiseLikeOfReactNode, ReactElement, ReactNode, ReactPortal, useEffect, useState } from "react";
 import { action_log, report } from "@prisma/client";
 import {
   DataGrid,
@@ -7,7 +7,7 @@ import {
   GridRowSelectionModel,
   GridToolbar,
 } from "@mui/x-data-grid";
-import { Button, Container, Stack, Typography } from "@mui/material";
+import { Button, Container, Stack, TextField, Typography } from "@mui/material";
 import Cookies from "js-cookie";
 import { Header } from "@/components/common/Header";
 
@@ -53,6 +53,22 @@ export default function AdminPanel() {
     { field: "user_id", headerName: "User ID", width: 100 },
     { field: "additional_info", headerName: "Additional Info", width: 300 },
   ];
+  const createReport = () => {
+    const selectedActionLogs = actionLogs.filter((log) =>
+      rowSelectionModel.includes(log.action_log_id)
+    );
+    const prettyReportText = formatReportText(selectedActionLogs);
+    fetch("/api/report", {
+      headers: {
+        "Content-Type": "application/json",
+        token: Cookies.get("currentUser") ?? "",
+      },
+      method: "POST",
+      body: JSON.stringify({
+        text: prettyReportText,
+      }),
+    }).then(fetchReports);
+  };
   function formatReportText(logs: action_log[]) {
     try {
       const formattedLogs = Object.values(logs).map((log) => {
@@ -70,22 +86,6 @@ export default function AdminPanel() {
       return "Error formatting report text.";
     }
   }
-  const createReport = () => {
-    const selectedActionLogs = actionLogs.filter((log) =>
-      rowSelectionModel.includes(log.action_log_id)
-    );
-    const prettyReportText = formatReportText(selectedActionLogs);
-    fetch("/api/report", {
-      headers: {
-        "Content-Type": "application/json",
-        token: Cookies.get("currentUser") ?? "",
-      },
-      method: "POST",
-      body: JSON.stringify({
-        text: prettyReportText,
-      }),
-    }).then(fetchReports);
-  };
   const reportColumns: GridColDef[] = [
     { 
       field: "generation_date", 
@@ -96,13 +96,10 @@ export default function AdminPanel() {
       field: "text", 
       headerName: "Text", 
       width: 700,
-      renderCell: (params) => (
-        <div style={{ whiteSpace: 'normal', lineHeight: 'normal' }}>
-          {params.value}
-        </div>
-      )
     },
   ];
+
+
   
   return (
     <Container maxWidth="xl">
@@ -141,6 +138,7 @@ export default function AdminPanel() {
           }}
           rows={reports}
           columns={reportColumns}
+          getRowHeight={()=> 52}
           initialState={{
             pagination: {
               paginationModel: {
@@ -148,6 +146,7 @@ export default function AdminPanel() {
               },
             },
           }}
+          sx={{mb:5}}
           checkboxSelection
           getRowId={(row) => row.report_id}
         />

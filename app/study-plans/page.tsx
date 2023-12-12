@@ -8,9 +8,7 @@ import {
   Button,
   Avatar,
   ListItemAvatar,
-  CircularProgress,
   Stack,
-  LinearProgress,
 } from "@mui/material";
 import { useEffect, useReducer, useState } from "react";
 import { study_plan } from "../api/study-plan/route";
@@ -113,7 +111,7 @@ export default function StudyPlans() {
             filterState={filterState}
             dispatchFilter={dispatchFilter}
           />
-          {user?.access_level && user?.access_level > 2 && (
+          {user?.access_level && user?.access_level === 3 && (
             <Button color="inherit" variant="outlined" href="/add-plan">Створити план</Button>
           )}
         </Stack>

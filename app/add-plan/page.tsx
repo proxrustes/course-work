@@ -40,9 +40,6 @@ export default function AddPlan() {
   const [faculties, setFaculties] = useState<
     { faculty_id: number; faculty_name: string; dean: string }[]
   >([]);
-  const [qualifications, setQualifications] = useState<
-    { qualification_id: number; qualification_name: string }[]
-  >([]);
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
 
@@ -53,7 +50,6 @@ export default function AddPlan() {
   const [selectedLevel, setSelectedLevel] = useState("");
   const [selectedDepartment, setSelectedDepartment] = useState("");
   const [selectedFaculty, setSelectedFaculty] = useState("");
-  const [selectedQualification, setSelectedQualification] = useState("");
 
   useEffect(() => {
     fetch("/api/subject", {
@@ -155,18 +151,7 @@ export default function AddPlan() {
       });
   }, []);
 
-  useEffect(() => {
-    fetch("/api/qualification", {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        setQualifications(json.message);
-      });
-  }, []);
+ 
   const handleSubmit = async () => {
     try {
       fetch("/api/study-plan", {
@@ -183,7 +168,6 @@ export default function AddPlan() {
           subject_id: selectedSubject,
           form_id: selectedFormOfStudy,
           duration_id: selectedDuration,
-          qualification_id: selectedQualification,
           creation_date: new Date(),
           title: title,
           text: text,
@@ -309,26 +293,6 @@ export default function AddPlan() {
               {faculties.map((faculty) => (
                 <MenuItem key={faculty.faculty_id} value={faculty.faculty_id}>
                   {faculty.faculty_name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <FormControl fullWidth size="small" sx={{ width: 300 }}>
-            <InputLabel id="qualification-label">
-              Select Qualification
-            </InputLabel>
-            <Select
-              labelId="qualification-label"
-              label="Select Qualification"
-              value={selectedQualification}
-              onChange={(e) => setSelectedQualification(e.target.value)}
-            >
-              {qualifications.map((qualification) => (
-                <MenuItem
-                  key={qualification.qualification_id}
-                  value={qualification.qualification_id}
-                >
-                  {qualification.qualification_name}
                 </MenuItem>
               ))}
             </Select>

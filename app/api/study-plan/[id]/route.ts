@@ -11,7 +11,6 @@ export async function DELETE(
     params: { id: string }
   }
 ) {
-  const body = await getBody(req)
   return prisma.study_plan.delete({
     where: { plan_id: parseInt(params.id) }
   })
@@ -40,7 +39,6 @@ export async function PUT(
         subject_id: parseInt(body.subject_id),
         form_id: parseInt(body.form_id),
         duration_id: parseInt(body.duration_id),
-        qualification_id: parseInt(body.qualification_id),
         is_approved: 0
       },
     })
@@ -105,13 +103,7 @@ export async function PUT(
                 duration_id: true,
                 duration_length: true
               }
-            },
-            qualification: {
-              select:{
-                qualification_name: true,
-                qualification_id: true
-              }
-            },
+            }
           }
       })
       .then((res) => NextResponse.json(HTTP_RESPONSES[200](res)))

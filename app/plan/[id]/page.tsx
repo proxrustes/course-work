@@ -134,10 +134,6 @@ export default function Plan({ params }: { params: { id: string } }) {
               <Typography variant="button" sx={{ mt: 2 }}>
                 Кваліфікація
               </Typography>
-              <Typography sx={{ fontWeight: 800 }}>
-                {" "}
-                {plan.qualification.qualification_name}
-              </Typography>
               <Typography variant="button" sx={{ mt: 2 }}>
                 Спеціальність
               </Typography>

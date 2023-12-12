@@ -1,9 +1,6 @@
 import { study_plan } from "@/app/api/study-plan/route";
 import {
-  Container,
   Stack,
-  Typography,
-  Divider,
   FormControl,
   InputLabel,
   Select,
@@ -11,7 +8,6 @@ import {
   MenuItem,
   TextField,
   Button,
-  Chip,
 } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useReducer } from "react";
@@ -49,8 +45,6 @@ function formReducer(state: any, action: any) {
       return { ...state, form_id: action.payload.form_id };
     case EDIT_ACTIONS.duration_id:
       return { ...state, duration_id: action.payload.duration_id };
-    case EDIT_ACTIONS.qualification_id:
-      return { ...state, qualification_id: action.payload.qualification_id };
     default:
       return state;
   }
@@ -67,7 +61,6 @@ const EDIT_ACTIONS = {
   subject_id: "subject_id",
   form_id: "form_id",
   duration_id: "duration_id",
-  qualification_id: "qualification_id",
 } as const;
 export interface FilterState {
   title: string;
@@ -80,7 +73,6 @@ export interface FilterState {
   subject_id: number;
   form_id: number;
   duration_id: number;
-  qualification_id: number;
 }
 export interface SetFilterAction {
   type: keyof typeof EDIT_ACTIONS;
@@ -101,12 +93,11 @@ export function EditField(props: Props) {
     subject_id: props.study_plan.subject.subject_id,
     form_id: props.study_plan.form.form_id,
     duration_id: props.study_plan.duration.duration_id,
-    qualification_id: props.study_plan.qualification.qualification_id,
   };
   const router = useRouter();
   const [formState, dispatch] = useReducer(formReducer, initialState);
   const [subjects, setSubjects] = useState<
-    { subject_id: number; subject_name: string; hours_count: number }[]
+    { subject_id: number; subject_name: string }[]
   >([]);
   const [durations, setDurations] = useState<
     { duration_id: number; duration_length: number }[]
@@ -414,31 +405,6 @@ export function EditField(props: Props) {
                   value={duration.duration_id}
                 >
                   {duration.duration_length}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <FormControl size="small" fullWidth sx={{ mt: 2 }}>
-            <InputLabel id="qualification-label">Кваліфікація</InputLabel>
-            <Select
-              labelId="qualification-label"
-              id="qualification-select"
-              value={formState.qualification_id}
-              onChange={(e) =>
-                dispatch({
-                  type: EDIT_ACTIONS.qualification_id,
-                  payload: { qualification_id: e.target.value },
-                })
-              }
-              input={<OutlinedInput label="Кваліфікація" />}
-              MenuProps={MenuProps}
-            >
-              {qualifications.map((qualification) => (
-                <MenuItem
-                  key={qualification.qualification_id}
-                  value={qualification.qualification_id}
-                >
-                  {qualification.qualification_name}
                 </MenuItem>
               ))}
             </Select>

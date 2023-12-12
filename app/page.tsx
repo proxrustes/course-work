@@ -1,6 +1,6 @@
 "use client";
 
-import { Avatar, Container, Stack, Tooltip, Typography } from "@mui/material";
+import { Container, IconButton, Stack, Tooltip, Typography } from "@mui/material";
 import { user } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { ReactNode, useEffect, useState } from "react";
@@ -8,7 +8,7 @@ import FaceIcon from "@mui/icons-material/Face";
 import SchoolIcon from "@mui/icons-material/School";
 import WorkIcon from "@mui/icons-material/Work";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
-
+import AddReactionIcon from '@mui/icons-material/AddReaction';
 export default function Home() {
   const [users, setUsers] = useState<user[]>([]);
 
@@ -55,6 +55,7 @@ export default function Home() {
     Professor: <SchoolIcon />,
     "Department Head": <WorkIcon />,
     Dean: <AccountBalanceIcon />,
+    Administrator: <AddReactionIcon/>
   };
   async function login(token: string) {
     const jwt = await handleLogin(token);
@@ -66,9 +67,9 @@ export default function Home() {
   function UserButton(props: { name: string; icon: ReactNode }) {
     return (
       <Tooltip title={props.name}>
-        <Avatar onClick={() => login(props.name).catch((e) => alert(e))}>
+        <IconButton onClick={() => login(props.name).catch((e) => alert(e))}>
           {props.icon}
-        </Avatar>
+        </IconButton>
       </Tooltip>
     );
   }

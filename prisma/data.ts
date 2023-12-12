@@ -11,8 +11,8 @@ async function main() {
     prisma.study_plan.deleteMany(),
     prisma.user.deleteMany(),
     prisma.subject.deleteMany(),
-    prisma.training_direction.deleteMany(),
     prisma.speciality.deleteMany(),
+    prisma.training_direction.deleteMany(),
     prisma.study_duration.deleteMany(),
     prisma.form_of_study.deleteMany(),
     prisma.faculty_institute.deleteMany(),
@@ -21,7 +21,6 @@ async function main() {
   ];
   await Promise.all(deleteOperations);
 
-  // Users
   const userRoles = [
     "Student",
     "Professor",
@@ -41,7 +40,6 @@ async function main() {
     createdUsers.push(createdUser);
   }
 
-  // Education Qualification Levels
   const qualificationLevels = ["Бакалавр", "Магістр", "Доктор"];
   const createdQualificationLevels = [];
   for (const level of qualificationLevels) {
@@ -51,7 +49,7 @@ async function main() {
     createdQualificationLevels.push(createdLevel);
   }
 
-  // Graduating Departments
+  // Катедри
   const departments = [
     { name: "ІСТ", head: "Тоні Старк" },
     { name: "БМІ", head: "Брюс Беннер" },
@@ -65,7 +63,7 @@ async function main() {
     createdDepartments.push(createdDepartment);
   }
 
-  // Faculty Institutes
+  // Факультети
   const faculties = [
     { name: "FIOT", dean: "Нікола Тесла" },
     { name: "ФБМІ", dean: "Доктор Лектер" },
@@ -78,7 +76,6 @@ async function main() {
     createdFaculties.push(createdFaculty);
   }
 
-  // Forms of Study
   const studyForms = ["Очна", "Заочна", "Вечірня", "Дистанційна"];
   const createdStudyForms = [];
   for (const form of studyForms) {
@@ -88,7 +85,6 @@ async function main() {
     createdStudyForms.push(createdForm);
   }
 
-  // Study Durations
   const durations = [1, 2, 3, 4]; // Семестри
   const createdDurations = [];
   for (const duration of durations) {
@@ -98,7 +94,6 @@ async function main() {
     createdDurations.push(createdDuration);
   }
 
-  // Training Directions
   const trainingDirections = [
     { name: "121" },
     { name: "122" },
@@ -113,7 +108,6 @@ async function main() {
     createdDirections.push(createdDirection);
   }
 
-  // Specialities
   const specialities = [
     { name: "Прикладна математика", direction: createdDirections[0] },
     { name: "Інформаційні системи та технології", direction: createdDirections[0] },
@@ -136,7 +130,6 @@ async function main() {
     createdSpecialities.push(createdSpeciality);
   }
 
-  // Subjects
   const subjects = [
     { name: "Дискретна математика" },
     { name: "Вища математика" },

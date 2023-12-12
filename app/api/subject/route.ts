@@ -9,7 +9,6 @@ export async function POST(req: any) {
     return prisma.subject.create({
         data: {
             subject_name: body.subject_name,
-            hours_count: body.hours_count,
         },
     })
     .then((res) => NextResponse.json(HTTP_RESPONSES[200](res)))
@@ -22,7 +21,6 @@ export async function GET(req: any) {
         select: {
             subject_id: true,
             subject_name: true,
-            hours_count: true,
         },
     })
     .then((res) => NextResponse.json(HTTP_RESPONSES[200](res)))

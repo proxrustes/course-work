@@ -13,7 +13,6 @@ export const ACTIONS = {
     subject_id: "subject_id",
     form_id: "form_id",
     duration_id: "duration_id",
-    qualification_id: "qualification_id"
   } as const;
   export interface FilterState {
     is_approved: "all" | "only" | "not";
@@ -24,7 +23,6 @@ export const ACTIONS = {
     subject_id: number[];
     form_id: number[];
     duration_id: number[];
-    qualification_id: number[];
   }
   export interface SetFilterAction {
     type: keyof typeof ACTIONS;
@@ -58,7 +56,7 @@ export const ACTIONS = {
       const [levels, setLevels] = useState<{ level_id: number; level_name: string }[]>([]);
       const [departments, setDepartments] = useState<{ department_id: number; department_name: string; head: string }[]>([]);
       const [faculties, setFaculties] = useState<{ faculty_id: number; faculty_name: string; dean: string }[]>([]);
-      const [qualifications, setQualifications] = useState<{ qualification_id: number; qualification_name: string }[]>([]);
+      
 
     useEffect(() => {
       fetch("/api/subject", {
@@ -155,19 +153,6 @@ export const ACTIONS = {
           });
   }, []);
 
-  // Fetch for qualifications
-  useEffect(() => {
-      fetch("/api/qualification", {
-          headers: {
-              "Content-Type": "application/json",
-          },
-          method: "GET",
-      })
-          .then((res) => res.json())
-          .then((json) => {
-              setQualifications(json.message);
-          });
-  }, []);
     return (
       <Stack sx={{pb: 2, width: 300 }}>
         <Typography variant="h5" sx={{ pt: 1 }}>
@@ -340,29 +325,7 @@ export const ACTIONS = {
           ))}
         </Select>
       </FormControl>
-      <FormControl fullWidth size="small" sx={{ mt: 2 }}>
-        <InputLabel id="qualification-label">Кваліфікація</InputLabel>
-        <Select
-          labelId="qualification-label"
-          id="qualification-select"
-          multiple
-          value={props.filterState.qualification_id}
-          onChange={(e) =>
-            props.dispatchFilter({
-              type: ACTIONS.qualification_id,
-              payload: { qualification_id: e.target.value as number[] },
-            })
-          }
-          input={<OutlinedInput label="Кваліфікація" />}
-          MenuProps={MenuProps}
-        >
-          {qualifications.map((qualification) => (
-            <MenuItem key={qualification.qualification_id} value={qualification.qualification_id}>
-              {qualification.qualification_name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+    
         <RadioGroupComponent
           title="затверджені плани"
           actionType={ACTIONS.is_approved}

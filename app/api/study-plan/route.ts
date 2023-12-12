@@ -16,7 +16,6 @@ export interface study_plan {
   faculty: { faculty_id: number; faculty_name: string };
   form: { form_id: number; form_name: string };
   duration: { duration_id: number; duration_length: string };
-  qualification: { qualification_id: number; qualification_name: string };
 }
 
 // GET request to fetch all study_plan with all fields
@@ -69,13 +68,7 @@ export async function GET(req: any) {
           duration_id: true,
           duration_length: true
         }
-      },
-      qualification: {
-        select:{
-          qualification_name: true,
-          qualification_id: true
-        }
-      },
+      }
     },
   })
   .then((res) => NextResponse.json(HTTP_RESPONSES[200](res)))
@@ -98,7 +91,6 @@ export async function POST(req: any) {
       subject_id: body.subject_id,
       form_id: body.form_id,
       duration_id: body.duration_id,
-      qualification_id: body.qualification_id,
       creation_date: new Date(), 
       title: body.title,
       text: body.text

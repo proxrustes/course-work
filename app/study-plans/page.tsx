@@ -45,7 +45,6 @@ const initialFilterState: FilterState = {
   subject_id: [],
   form_id: [],
   duration_id: [],
-  qualification_id: [],
 };
 
 export default function StudyPlans() {

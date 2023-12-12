@@ -63,7 +63,6 @@ model study_plan {
   subject_id Int
   form_id          Int
   duration_id      Int
-  qualification_id Int
   creation_date    DateTime
   title             String
   text             String

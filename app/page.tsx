@@ -9,6 +9,7 @@ import SchoolIcon from "@mui/icons-material/School";
 import WorkIcon from "@mui/icons-material/Work";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import AddReactionIcon from '@mui/icons-material/AddReaction';
+import { Header } from "@/components/common/Header";
 export default function Home() {
   const [users, setUsers] = useState<user[]>([]);
 
@@ -75,8 +76,9 @@ export default function Home() {
   }
 
   return (
-    <Container>
-      <Typography variant="h1">Навчальні Плани</Typography>
+    <Container maxWidth="xl">
+      <Header />
+      <Typography variant="h3">Навчальні Плани</Typography>
       <Typography variant="button">Log in as:</Typography>
       <Stack direction="row" justifyContent="center" gap={1} flexWrap="wrap">
         {users

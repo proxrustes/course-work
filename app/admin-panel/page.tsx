@@ -7,8 +7,9 @@ import {
   GridRowSelectionModel,
   GridToolbar,
 } from "@mui/x-data-grid";
-import { Button, Container, Stack } from "@mui/material";
+import { Button, Container, Stack, Typography } from "@mui/material";
 import Cookies from "js-cookie";
+import { Header } from "@/components/common/Header";
 
 export default function AdminPanel() {
   const [actionLogs, setActionLogs] = useState<action_log[]>([]);
@@ -86,14 +87,29 @@ export default function AdminPanel() {
     }).then(fetchReports);
   };
   const reportColumns: GridColDef[] = [
-    { field: "generation_date", headerName: "Generation Date", width: 200 },
-    { field: "text", headerName: "Text", width: 700 },
+    { 
+      field: "generation_date", 
+      headerName: "Generation Date", 
+      width: 200 
+    },
+    { 
+      field: "text", 
+      headerName: "Text", 
+      width: 700,
+      renderCell: (params) => (
+        <div style={{ whiteSpace: 'normal', lineHeight: 'normal' }}>
+          {params.value}
+        </div>
+      )
+    },
   ];
+  
   return (
     <Container maxWidth="xl">
+      <Header />
       <Stack gap={2}>
+        <Typography sx={{ mt: 5 }} variant="h5">Action Logs</Typography>
         <DataGrid
-          sx={{ mt: 5 }}
           rows={actionLogs}
           columns={columns}
           initialState={{
@@ -118,11 +134,11 @@ export default function AdminPanel() {
         >
           Create Report
         </Button>
+        <Typography sx={{ mt: 5 }} variant="h5">Reports</Typography>
         <DataGrid
           slots={{
             toolbar: GridToolbar,
           }}
-          sx={{ mt: 5 }}
           rows={reports}
           columns={reportColumns}
           initialState={{

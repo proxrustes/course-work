@@ -16,6 +16,7 @@ import {
 import { useRouter } from "next/navigation";
 
 import { useEffect, useState } from "react";
+import { Header } from "@/components/common/Header";
 
 export default function AddPlan() {
   const router = useRouter();
@@ -182,6 +183,7 @@ export default function AddPlan() {
 
   return user?.access_level && user.access_level > 2 ? (
     <Container maxWidth="xl">
+      <Header />
       <Typography variant="h2">Add Study Plan</Typography>
       <Stack direction="row" gap={4} sx={{ mt: 4 }}>
         <Stack gap={1}>

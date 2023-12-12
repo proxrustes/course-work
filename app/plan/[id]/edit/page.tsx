@@ -1,6 +1,7 @@
 "use client";
 import { plan_change } from "@/app/api/study-plan/[id]/changes/route";
 import { study_plan } from "@/app/api/study-plan/route";
+import { Header } from "@/components/common/Header";
 import { EditField } from "@/components/pages/study-plans/EditField";
 import { PlanChanges } from "@/components/pages/study-plans/PlanChanges";
 import { ERROR_TYPES } from "@/definitions/enums/errors";
@@ -49,9 +50,10 @@ export default function Plan({ params }: { params: { id: string } }) {
   }, [params.id]);
 
   return (
-    <>
+    <Container maxWidth="xl">
+      <Header />
       {plan && user?.access_level && user?.access_level > 2 ? (
-        <Container maxWidth="xl">
+        <>
           <EditField study_plan={plan} />
           <Typography variant="h5" sx={{ mt: 4 }}>
             Запропоновані зміни:
@@ -62,8 +64,8 @@ export default function Plan({ params }: { params: { id: string } }) {
             planId={plan.plan_id}
             user={user}
           />
-        </Container>
+        </>
       ) : null}
-    </>
+    </Container>
   );
 }

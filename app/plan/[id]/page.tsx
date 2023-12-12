@@ -17,6 +17,7 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { plan_change } from "@/app/api/study-plan/[id]/changes/route";
 import { PlanChanges } from "@/components/pages/study-plans/PlanChanges";
+import { Header } from "@/components/common/Header";
 export default function Plan({ params }: { params: { id: string } }) {
   const [user] = useCurrentUser();
   const router = useRouter();
@@ -98,6 +99,7 @@ export default function Plan({ params }: { params: { id: string } }) {
 
   return (
     <Container maxWidth="xl">
+      <Header />
       {plan && (
         <>
           {" "}

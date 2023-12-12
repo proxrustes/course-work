@@ -23,6 +23,7 @@ import { useRouter } from "next/navigation";
 import useCurrentUser from "@/hooks/auth/useCurrentUser";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import { Header } from "@/components/common/Header";
 
 const filterReducer = (
   state: FilterState,
@@ -77,6 +78,7 @@ export default function StudyPlans() {
 
   return (
     <Container maxWidth="xl">
+      <Header />
       <Typography variant="h2">Перегляд Навчальних Планів</Typography>
       <Stack direction="row" gap={2}> 
      

@@ -115,7 +115,7 @@ export default function StudyPlans() {
             dispatchFilter={dispatchFilter}
           />
           {user?.access_level && user?.access_level > 2 && (
-            <Button color="inherit" variant="outlined" href="/add-plan">Create Plan</Button>
+            <Button color="inherit" variant="outlined" href="/add-plan">Створити план</Button>
           )}
         </Stack>
       </Stack>

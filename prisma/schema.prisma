@@ -53,12 +53,6 @@ model study_duration {
   study_plans     study_plan[]
 }
 
-model qualification {
-  qualification_id   Int          @id @default(autoincrement())
-  qualification_name String
-  study_plans        study_plan[]
-}
-
 model study_plan {
   plan_id          Int                           @id @default(autoincrement())
   is_approved      Int
@@ -81,13 +75,11 @@ model study_plan {
   faculty          faculty_institute             @relation(fields: [faculty_id], references: [faculty_id])
   form             form_of_study                 @relation(fields: [form_id], references: [form_id])
   duration         study_duration                @relation(fields: [duration_id], references: [duration_id])
-  qualification    qualification                 @relation(fields: [qualification_id], references: [qualification_id])
 }
 
 model subject {
   subject_id    Int            @id @default(autoincrement())
   subject_name  String
-  hours_count   Int
   plans         study_plan[]
 }
 

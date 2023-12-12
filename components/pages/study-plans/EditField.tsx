@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useReducer } from "react";
-
+import Cookies from "js-cookie"
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -234,6 +234,7 @@ export function EditField(props: Props) {
     fetch(`/api/study-plan/${props.study_plan.plan_id}`, {
       headers: {
         "Content-Type": "application/json",
+        "token": Cookies.get("currentUser") ?? ''
       },
       body: JSON.stringify(formState),
       method: "PUT",

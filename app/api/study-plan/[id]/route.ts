@@ -2,6 +2,8 @@ import { HTTP_RESPONSES } from "@/definitions/enums/httpResponses";
 import { getBody } from "@/lib/apiUtils/getBody";
 import { getHeader } from "@/lib/apiUtils/getHeader";
 import { prisma } from "@/prisma/prismaClient";
+import { user } from "@prisma/client";
+import { decodeJwt } from "jose";
 import { NextResponse } from "next/server";
 
 export async function  DELETE(
@@ -12,16 +14,16 @@ export async function  DELETE(
     params: { id: string }
   }
 ) {
+  const token = await getHeader(req, "token") as string
+  const token_user = decodeJwt(token) as user
   try {
-    const token = await getHeader(req, "token")
-    console.log(token)
     const deletedPlan = await prisma.study_plan.delete({
       where: { plan_id: parseInt(params.id) }
     });
     await prisma.action_log.create({
       data: {
         action: "DELETE",
-        user_id: req.user_id,
+        user_id: token_user.user_id,
         additional_info: `plan_id: ${params.id}`
       }
     })
@@ -29,9 +31,9 @@ export async function  DELETE(
   } catch (error) {
     await prisma.action_log.create({
       data: {
-        action: "FALIED DELETE",
-        user_id: req.user_id,
-        additional_info: `plan_id: ${params.id}`
+        action: "X DELETE X",
+        user_id: token_user.user_id,
+        additional_info: `plan_id: ${params.id}, ${error}`
       }
     })
     return NextResponse.json(HTTP_RESPONSES[500](error));
@@ -47,24 +49,46 @@ export async function PUT(
       params: { id: string }
     }
   ) {
-    const body = await getBody(req)
-    return prisma.study_plan.update({
-      where: { plan_id: parseInt(params.id) },
-      data: {
-        text: body.text,
-        title: body.title,
-        speciality_id: parseInt(body.speciality_id),
-        level_id: parseInt(body.level_id),
-        department_id: parseInt(body.department_id),
-        faculty_id: parseInt(body.faculty_id),
-        subject_id: parseInt(body.subject_id),
-        form_id: parseInt(body.form_id),
-        duration_id: parseInt(body.duration_id),
-        is_approved: 0
-      },
-    })
-    .then((res) => NextResponse.json(HTTP_RESPONSES[200](res)))
-    .catch((error) => NextResponse.json(HTTP_RESPONSES[500](error)));
+    const token = await getHeader(req, "token") as string
+    const token_user = decodeJwt(token) as user
+    try {
+      const body = await getBody(req);
+  
+      // Update the study plan
+      const updatedPlan = await prisma.study_plan.update({
+        where: { plan_id: parseInt(params.id) },
+        data: {
+          text: body.text,
+          title: body.title,
+          speciality_id: parseInt(body.speciality_id),
+          level_id: parseInt(body.level_id),
+          department_id: parseInt(body.department_id),
+          faculty_id: parseInt(body.faculty_id),
+          subject_id: parseInt(body.subject_id),
+          form_id: parseInt(body.form_id),
+          duration_id: parseInt(body.duration_id),
+          is_approved: 0
+        },
+      })
+  
+      await prisma.action_log.create({
+        data: {
+          action: "UPDATE",
+          user_id: token_user.user_id, 
+          additional_info: `Updated plan id: ${params.id}`
+        }
+      })
+      return NextResponse.json(HTTP_RESPONSES[200](updatedPlan));
+    } catch (error) {
+      await prisma.action_log.create({
+        data: {
+          action: "X UPDATE X",
+          user_id: token_user.user_id, 
+          additional_info: `Failed to update plan id: ${params.id}, ${error}`
+        }
+      })
+      return NextResponse.json(HTTP_RESPONSES[500](error));
+    }
   }
   // GET request to get a plan
   export async function GET(

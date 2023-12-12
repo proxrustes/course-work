@@ -9,22 +9,6 @@ export interface plan_change{
             change_description: string,
 }
 
-// POST request to create a new plan_change
-export async function POST(req: any) {
-    const body = JSON.parse(req.body);
-
-    return prisma.plan_change.create({
-        data: {
-            plan_id: body.plan_id,
-            change_date: new Date(),
-            user_id: body.user_id,
-            change_description: body.change_description,
-        },
-    })
-    .then((res) => NextResponse.json(HTTP_RESPONSES[200](res))) 
-    .catch((error) => NextResponse.json(HTTP_RESPONSES[500](error)));
-}
-
 // GET request to fetch all plan_changes
 export async function GET(req: any) {
     return prisma.plan_change.findMany({

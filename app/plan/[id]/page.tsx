@@ -17,7 +17,6 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { plan_change } from "@/app/api/study-plan/[id]/changes/route";
 import { PlanChanges } from "@/components/pages/study-plans/PlanChanges";
-
 export default function Plan({ params }: { params: { id: string } }) {
   const [user] = useCurrentUser();
   const router = useRouter();
@@ -34,6 +33,7 @@ export default function Plan({ params }: { params: { id: string } }) {
       fetch(`/api/study-plan/${params.id}/changes`, {
         headers: {
           "Content-Type": "application/json",
+          "token": Cookies.get("currentUser") ?? ''
         },
         body: JSON.stringify(payload),
         method: "POST",

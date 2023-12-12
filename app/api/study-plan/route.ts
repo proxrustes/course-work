@@ -2,6 +2,8 @@ import { HTTP_RESPONSES } from "@/definitions/enums/httpResponses";
 import { getBody } from "@/lib/apiUtils/getBody";
 import { getHeader } from "@/lib/apiUtils/getHeader";
 import { prisma } from "@/prisma/prismaClient";
+import { user } from "@prisma/client";
+import { decodeJwt } from "jose";
 import { NextResponse } from "next/server";
 
 export interface study_plan {
@@ -78,10 +80,11 @@ export async function GET(req: any) {
 
   // POST request to create a new study plan
   export async function POST(req: any) {
+    const token = await getHeader(req, "token") as string
+    const token_user = decodeJwt(token) as user
     try {
       const body = await getBody(req);
-      const token = await getHeader(req, "token")
-       console.log(token)
+
       const plan = await prisma.study_plan.create({
         data: {
           is_approved: body.is_approved,
@@ -100,13 +103,20 @@ export async function GET(req: any) {
   
       await prisma.action_log.create({
         data: {
-          action: "CREATE",
-          user_id: parseInt(body.user_id),
+          action: "ADD",
+          user_id: token_user.user_id,
           additional_info: `plan id: ${plan.plan_id}`
         }
       });
       return NextResponse.json(HTTP_RESPONSES[200](plan));
     } catch (error) {
+      await prisma.action_log.create({
+        data: {
+          action: "X ADD X",
+          user_id: token_user.user_id, 
+          additional_info: `Failed to add plan, ${error}`
+        }
+      })
       return NextResponse.json(HTTP_RESPONSES[500](error));
     }
   }

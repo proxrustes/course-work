@@ -79,7 +79,7 @@ export default function StudyPlans() {
   return (
     <Container maxWidth="xl">
       <Header />
-      <Typography variant="h2">Перегляд Навчальних Планів</Typography>
+      <Typography variant="h4" sx={{mt:4}}>Перегляд Навчальних Планів</Typography>
       <Stack direction="row" gap={2}> 
      
         <Stack alignContent="center" width="100%">

@@ -21,7 +21,6 @@ export interface study_plan {
   duration: { duration_id: number; duration_length: string };
 }
 
-// GET request to fetch all study_plan with all fields
 export async function GET(req: any) {
   return prisma.study_plan.findMany({
     select: {
@@ -78,7 +77,6 @@ export async function GET(req: any) {
   .catch((error) => NextResponse.json(HTTP_RESPONSES[500](error)));
 }
 
-  // POST request to create a new study plan
   export async function POST(req: any) {
     const token = await getHeader(req, "token") as string
     const token_user = decodeJwt(token) as user

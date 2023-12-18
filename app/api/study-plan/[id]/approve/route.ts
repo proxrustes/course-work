@@ -6,7 +6,6 @@ import { user } from "@prisma/client";
 import { decodeJwt } from "jose";
 import { NextResponse } from "next/server";
 
-// PUT request to update a plan
 export async function PUT(
     req: any,
     {
@@ -30,7 +29,7 @@ export async function PUT(
   
       await prisma.action_log.create({
         data: {
-          action: "UPDATE",
+          action: "APPROVE",
           user_id: token_user.user_id,
           additional_info: `plan id: ${params.id}`
         }
@@ -40,7 +39,7 @@ export async function PUT(
     } catch (error) {
       await prisma.action_log.create({
         data: {
-          action: "X UPDATE X",
+          action: "X APPROVE X",
           user_id: token_user.user_id,
           additional_info: `plan id: ${params.id}, ${error}`
         }

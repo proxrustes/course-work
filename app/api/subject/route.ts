@@ -2,7 +2,6 @@ import { HTTP_RESPONSES } from "@/definitions/enums/httpResponses";
 import { prisma } from "@/prisma/prismaClient";
 import { NextResponse } from "next/server";
 
-// GET request to fetch all subjects
 export async function GET(req: any) {
     return prisma.subject.findMany({
         select: {

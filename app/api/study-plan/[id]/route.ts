@@ -40,7 +40,6 @@ export async function  DELETE(
   }
 }
 
-// PUT request to update a plan
 export async function PUT(
     req: any,
     {
@@ -54,7 +53,6 @@ export async function PUT(
     try {
       const body = await getBody(req);
   
-      // Update the study plan
       const updatedPlan = await prisma.study_plan.update({
         where: { plan_id: parseInt(params.id) },
         data: {

@@ -14,7 +14,6 @@ export interface plan_change{
             change_description: string,
 }
 
-// POST request to create a new plan_change
 export async function POST(
     req: any,
     {
@@ -60,7 +59,6 @@ export async function POST(
   }
 }
 
-// GET request to fetch all plan_changes
 export async function GET(
     req: any,
     {

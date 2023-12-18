@@ -184,8 +184,8 @@ export default function AddPlan() {
   return user?.access_level && user.access_level > 2 ? (
     <Container maxWidth="xl">
       <Header />
-      <Typography variant="h2">Add Study Plan</Typography>
-      <Stack direction="row" gap={4} sx={{ mt: 4 }}>
+      <Typography variant="h4">Створити навчальний план</Typography>
+      <Stack direction="row" gap={4} sx={{ mt: 2 }}>
         <Stack gap={1}>
           <FormControl fullWidth size="small" sx={{ width: 300 }}>
             <InputLabel id="subject-label">Select Subject</InputLabel>

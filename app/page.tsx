@@ -78,8 +78,9 @@ export default function Home() {
   return (
     <Container maxWidth="xl">
       <Header />
-      <Typography variant="h3">Навчальні Плани</Typography>
-      <Typography variant="button">Log in as:</Typography>
+      <Stack direction="column" alignItems="center" sx={{mt: 10}}> 
+      <Typography variant="h3" color="white">Навчальні Плани</Typography>
+      <Typography variant="button" color="white" sx={{mt:6, mb: 1}}>Log in as:</Typography>
       <Stack direction="row" justifyContent="center" gap={1} flexWrap="wrap">
         {users
           ? users.map((user) => (
@@ -89,6 +90,7 @@ export default function Home() {
               />
             ))
           : null}
+      </Stack>
       </Stack>
     </Container>
   );

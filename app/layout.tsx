@@ -1,9 +1,7 @@
 "use client"
-import { Header } from "@/components/common/Header"
-import { user } from "@prisma/client";
-import { decodeJwt } from "jose";
-import { useState, useEffect } from "react";
-import Cookies from "js-cookie";
+
+import ThemeRegistry from "@/components/ThemeRegistry"
+import { CssBaseline } from "@mui/material"
 
 export default function RootLayout({
   children,
@@ -14,7 +12,11 @@ export default function RootLayout({
  
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>  <ThemeRegistry options={{ key: "mui" }}>
+      <CssBaseline />
+            {children}
+        </ThemeRegistry>
+      </body>
     </html>
   )
 }

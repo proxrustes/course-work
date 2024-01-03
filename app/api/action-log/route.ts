@@ -13,7 +13,7 @@ export async function POST(req: any) {
             additional_info: body.additional_info,
         },
     })
-    .then((res) => NextResponse.json(HTTP_RESPONSES[200](res))) // HTTP 201 Created
+    .then((res) => NextResponse.json(HTTP_RESPONSES[200](res)))
     .catch((error) => NextResponse.json(HTTP_RESPONSES[500](error)));
 }
 
